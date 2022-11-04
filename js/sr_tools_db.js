@@ -2,28 +2,36 @@ var db = {
 	// Generate a random race
 	gen_race: function()
 	{
-		var r = roll.dval(100), res;
+		var races = new Map();
+		races.set(0.66, 'Human');
+		races.set(0.16, 'Ork');
+		races.set(0.13, 'Elf');
+		races.set(0.02, 'Dwarf');
+		races.set(0.02, 'Troll');
+		races.set(0.01, 'other');
 
-		switch (true)
+		var r = Math.random(), res;
+
+		for(var i = 0, a = 0; i < races.size; i++)
 		{
-			case (r < 40):
-				res = 'Human';
-				break;
+			a += races[i].key;
+			if(r >= a)
+				continue;
 
-			case (r < 65):
-				res = 'Ork';
-				break;
+			res = races[i].value;
+			break;
+		}
 
-			case (r < 80):
-				res = 'Elf';
-				break;
-
-			case (r < 95):
-				res = 'Dwarf';
-				break;
-
-			default:
-				res = 'Troll';
+		if(res === 'other')
+		{
+			var special = Array('Gnome', 'Harume', 'Koborokuru', 'Menehune', 'Querx',
+				'Dalakiton', 'Dryade', 'Night One', 'Wakyambi', 'Xapiri Thepe',
+				'Nartaki',
+				'Hobgoblin', 'Ogre', 'Oni', 'Satyr',
+				'Cyclops', 'Fomori', 'Giant', 'Minotaur',
+				'Vampire', 'Nosferatu', 'Banshee', 'Harvester', 'Goblin', 'Gnawer', 'Wendigo', 'Grendel', 'Fomoraig', 'Mutaqua',
+				'Pixie');
+			res = special[Math.floor(Math.random() * special.length)]
 		}
 
 		return res;
@@ -31,6 +39,7 @@ var db = {
 
 	get_base_attributes: function(rating)
 	{
+		//TODO: Add more variety
 		var res = {};
 
 		switch (rating)
@@ -1728,6 +1737,7 @@ var db = {
 			augmentations: []
 		};
 
+		//TODO: Add new metatype versions
 		switch (race)
 		{
 			case 'Human':
@@ -1832,6 +1842,7 @@ var db = {
 
 	get_quality_list: function()
 	{
+		//TODO: Add more qualities
 		return {
 			positive: [
 				'Ambidextrous',

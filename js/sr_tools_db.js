@@ -2099,35 +2099,159 @@ var db = {
 				res.augmentations.push({name: 'Extended Reach (1)'});
 				break;
 
-			//TODO: Find stats and complete infected values
 			case 'Vampire':
+				res.attributes.edge += 1;
+				res.min_attributes.edge += 1;
+				res.max_attributes.edge += 1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Nosferatu':
+				res.attributes.edge += 1;
+				res.min_attributes.edge += 1;
+				res.max_attributes.edge += 1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Banshee':
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.charisma += 2;
+				res.min_attributes.charisma += 2;
+				res.max_attributes.charisma += 2;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Harvester':
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.charisma += 2;
+				res.min_attributes.charisma += 2;
+				res.max_attributes.charisma += 2;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Goblin':
+				res.attributes.body += 2;
+				res.min_attributes.body += 2;
+				res.max_attributes.body += 2;
+				res.attributes.reaction += -1;
+				res.max_attributes.reaction += -1;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.will += 1;
+				res.min_attributes.will += 1;
+				res.max_attributes.will += 1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Gnawer':
+				res.attributes.body += 2;
+				res.min_attributes.body += 2;
+				res.max_attributes.body += 2;
+				res.attributes.reaction += -1;
+				res.max_attributes.reaction += -1;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.will += 1;
+				res.min_attributes.will += 1;
+				res.max_attributes.will += 1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Wendigo':
+				res.attributes.body += 3;
+				res.min_attributes.body += 3;
+				res.max_attributes.body += 3;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.charisma += -1;
+				res.max_attributes.charisma += -1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Grendel':
+				res.attributes.body += 3;
+				res.min_attributes.body += 3;
+				res.max_attributes.body += 3;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.charisma += -1;
+				res.max_attributes.charisma += -1;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Fomoraig':
+				res.attributes.body += 4;
+				res.min_attributes.body += 4;
+				res.max_attributes.body += 4;
+				res.attributes.agility += -1;
+				res.max_attributes.agility += -1;
+				res.attributes.strength += 4;
+				res.min_attributes.strength += 4;
+				res.max_attributes.strength += 4;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.intuition += -1;
+				res.max_attributes.intuition += -1;
+				res.attributes.charisma += -2;
+				res.max_attributes.charisma += -2;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Mutaqua':
+				res.attributes.body += 4;
+				res.min_attributes.body += 4;
+				res.max_attributes.body += 4;
+				res.attributes.agility += -1;
+				res.max_attributes.agility += -1;
+				res.attributes.strength += 4;
+				res.min_attributes.strength += 4;
+				res.max_attributes.strength += 4;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.intuition += -1;
+				res.max_attributes.intuition += -1;
+				res.attributes.charisma += -2;
+				res.max_attributes.charisma += -2;
+				res.attributes.magic += 6;
+				break;
+
+			case 'Bandersnatch':
+				res.attributes.body += 5;
+				res.min_attributes.body += 5;
+				res.max_attributes.body += 5;
+				res.attributes.strength += 4;
+				res.min_attributes.strength += 4;
+				res.max_attributes.strength += 4;
+				res.attributes.magic += 6;
+				break;
+			case 'Dzoo-Noo-Qua':
+				res.attributes.body += 4;
+				res.min_attributes.body += 4;
+				res.max_attributes.body += 4;
+				res.attributes.agility += -1;
+				res.max_attributes.agility += -1;
+				res.attributes.strength += 4;
+				res.min_attributes.strength += 4;
+				res.max_attributes.strength += 4;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.intuition += -1;
+				res.max_attributes.intuition += -1;
+				res.attributes.charisma += -2;
+				res.max_attributes.charisma += -2;
+				res.attributes.magic += 6;
 				break;
 
 			case 'Centaur':

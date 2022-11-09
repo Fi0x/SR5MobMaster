@@ -821,14 +821,7 @@ var render = {
 		}
 
 		// Set/Hide Magic
-		if (data.special.hasOwnProperty('Magic'))
-		{
-			$mook.find('.attribute_values .attribute_value.magic').html(data.special.Magic);
-		}
-		else
-		{
-			$mook.find('.attribute_name.magic, .attribute_value.magic').hide();
-		}
+		$mook.find('.attribute_values .attribute_value.magic').html(data.special.Magic);
 
 		// Initiative
 		var initiative = this.calc_initiative(data, augmented_attributes);
@@ -1658,14 +1651,7 @@ var render = {
 		}
 
 		// Set/Hide Magic
-		if (data.special.hasOwnProperty('Magic'))
-		{
-			$mook.find('.attribute_values .attribute_value.magic').html(data.special.Magic);
-		}
-		else
-		{
-			$mook.find('.attribute_name.magic, .attribute_value.magic').hide();
-		}
+		$mook.find('.attribute_values .attribute_value.magic').html(data.special.Magic);
 
 		// Initiative
 		var initiative = this.calc_initiative(data, augmented_attributes);

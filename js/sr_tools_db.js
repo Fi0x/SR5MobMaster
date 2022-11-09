@@ -10,11 +10,12 @@ var db = {
 		races.set(0.02, 'Troll');
 		races.set(0.01, 'other');
 
-		var r = Math.random(), res;
+		var r = Math.random(), res, a = 0;
 
 		for(let [key, value] of races)
 		{
-			if(r >= key)
+			a += key;
+			if(r >= a)
 				continue;
 
 			res = value;
@@ -23,13 +24,13 @@ var db = {
 
 		if(res === 'other')
 		{
-			var special = Array('Gnome', 'Harume', 'Koborokuru', 'Menehune', 'Querx',
+			var special = ['Gnome', 'Hanuman', 'Koborokuru', 'Menehune', 'Querx',
 				'Dalakiton', 'Dryade', 'Night One', 'Wakyambi', 'Xapiri Thepe',
 				'Nartaki',
 				'Hobgoblin', 'Ogre', 'Oni', 'Satyr',
 				'Cyclops', 'Fomori', 'Giant', 'Minotaur',
 				'Vampire', 'Nosferatu', 'Banshee', 'Harvester', 'Goblin', 'Gnawer', 'Wendigo', 'Grendel', 'Fomoraig', 'Mutaqua',
-				'Pixie');
+				'Pixie'];
 			res = special[Math.floor(Math.random() * special.length)]
 		}
 
@@ -1730,92 +1731,238 @@ var db = {
 	get_metatype_adjustment: function(race)
 	{
 		var res = {
-			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0},
-			min_attributes: {body: 1, agility: 1, reaction: 1, strength: 1, will: 1, logic: 1, intuition: 1, charisma: 1},
-			max_attributes: {body: 6, agility: 6, reaction: 6, strength: 6, will: 6, logic: 6, intuition: 6, charisma: 6},
+			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0, edge: 0, magic: 0, resonance: 0},
+			min_attributes: {body: 1, agility: 1, reaction: 1, strength: 1, will: 1, logic: 1, intuition: 1, charisma: 1, edge: 1, magic: 0, resonance: 0},
+			max_attributes: {body: 6, agility: 6, reaction: 6, strength: 6, will: 6, logic: 6, intuition: 6, charisma: 6, edge: 6, magic: 6, resonance: 6},
 			augmentations: []
 		};
 
-		//TODO: Add new metatype versions
 		switch (race)
 		{
 			case 'Human':
+				res.attributes.edge += 1;
+				res.min_attributes.edge += 1;
+				res.max_attributes.edge += 1;
 				break;
 
 			case 'Elf':
-				res.attributes.agility = 1;
-				res.min_attributes.agility = 2;
-				res.max_attributes.agility = 7;
-				res.attributes.charisma = 2;
-				res.min_attributes.charisma = 3;
-				res.max_attributes.charisma = 8;
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.charisma += 2;
+				res.min_attributes.charisma += 2;
+				res.max_attributes.charisma += 2;
+				res.augmentations.push({name: 'Low-Light Vision'});
 				break;
 
 			case 'Dwarf':
-				res.attributes.body = 2;
-				res.min_attributes.body = 3;
-				res.max_attributes.body = 8;
-				res.attributes.reaction = -1;
-				res.min_attributes.reaction = 1;
-				res.max_attributes.reaction = 5;
-				res.attributes.strength = 2;
-				res.min_attributes.strength = 3;
-				res.max_attributes.strength = 8;
-				res.attributes.will = 1;
-				res.min_attributes.will = 2;
-				res.max_attributes.will = 7;
+				res.attributes.body += 2;
+				res.min_attributes.body += 2;
+				res.max_attributes.body += 2;
+				res.attributes.reaction += -1;
+				res.max_attributes.reaction += -1;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.will += 1;
+				res.min_attributes.will += 1;
+				res.max_attributes.will += 1;
+				res.augmentations.push({name: 'Thermographic Vision'});
+				res.augmentations.push({name: 'Pathogen Resistance 2'});
+				res.augmentations.push({name: 'Toxin Resistance 2'});
+				res.augmentations.push({name: 'Lifestyle Costs 120%'});
 				break;
 
 			case 'Ork':
-				res.attributes.body = 3;
-				res.min_attributes.body = 4;
-				res.max_attributes.body = 9;
-				res.attributes.strength = 2;
-				res.min_attributes.strength = 3;
-				res.max_attributes.strength = 8;
-				res.attributes.logic = -1;
-				res.min_attributes.logic = 1;
-				res.max_attributes.logic = 5;
-				res.attributes.charisma = -1;
-				res.min_attributes.charisma = 1;
-				res.max_attributes.charisma = 5;
+				res.attributes.body += 3;
+				res.min_attributes.body += 3;
+				res.max_attributes.body += 3;
+				res.attributes.strength += 2;
+				res.min_attributes.strength += 2;
+				res.max_attributes.strength += 2;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.charisma += -1;
+				res.max_attributes.charisma += -1;
+				res.augmentations.push({name: 'Low-Light Vision'});
 				break;
 
 			case 'Troll':
-				res.attributes.body = 4;
-				res.min_attributes.body = 5;
-				res.max_attributes.body = 10;
-				res.attributes.agility = -1;
-				res.min_attributes.agility = 1;
-				res.max_attributes.agility = 5;
-				res.attributes.strength = 4;
-				res.min_attributes.strength = 5;
-				res.max_attributes.strength = 10;
-				res.attributes.logic = -1;
-				res.min_attributes.logic = 1;
-				res.max_attributes.logic = 5;
-				res.attributes.intuition = -1;
-				res.min_attributes.intuition = 1;
-				res.max_attributes.intuition = 5;
-				res.attributes.charisma = -2;
-				res.min_attributes.charisma = 1;
-				res.max_attributes.charisma = 4;
-				res.augmentations.push({name: 'Troll Dermal Deposits'});
+				res.attributes.body += 4;
+				res.min_attributes.body += 4;
+				res.max_attributes.body += 4;
+				res.attributes.agility += -1;
+				res.max_attributes.agility += -1;
+				res.attributes.strength += 4;
+				res.min_attributes.strength += 4;
+				res.max_attributes.strength += 4;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.intuition += -1;
+				res.max_attributes.intuition += -1;
+				res.attributes.charisma += -2;
+				res.max_attributes.charisma += -2;
+				res.augmentations.push({name: 'Thermographic Vision'});
+				res.augmentations.push({name: 'Troll Reach 1'});
+				res.augmentations.push({name: 'Troll Dermal Deposits 1'});
+				res.augmentations.push({name: 'Lifestyle Costs 200%'});
 				break;
 
-			case 'Special':
-				res.max_attributes.agility = 30;
-				res.max_attributes.body = 30;
-				res.max_attributes.reaction = 30;
-				res.max_attributes.strength = 30;
-				res.max_attributes.will = 30;
-				res.max_attributes.logic = 30;
-				res.max_attributes.intuition = 30;
-				res.max_attributes.charisma = 30;
+			case 'Gnome':
+				res.attributes.body += -2;
+				res.max_attributes.body += -2;
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.strength += -2;
+				res.max_attributes.strength += -2;
+				res.attributes.will += 1;
+				res.min_attributes.will += 1;
+				res.max_attributes.will += 1;
+				res.attributes.logic += 1;
+				res.min_attributes.logic += 1;
+				res.max_attributes.logic += 1;
+				res.augmentations.push({name: 'Arcane Arrester 2'});
+				res.augmentations.push({name: 'Neoteny'});
+				res.augmentations.push({name: 'Thermographic Vision'});
+				break;
+
+			case 'Hanuman':
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.strength += 1;
+				res.min_attributes.strength += 1;
+				res.max_attributes.strength += 1;
+				res.attributes.logic += -1;
+				res.max_attributes.logic += -1;
+				res.attributes.intuition += 1;
+				res.min_attributes.intuition += 1;
+				res.max_attributes.intuition += 1;
+				res.attributes.charisma += -1;
+				res.max_attributes.charisma += -1;
+				res.augmentations.push({name: 'Low-Light Vision'});
+				res.augmentations.push({name: 'Monkey Pawns'});
+				res.augmentations.push({name: 'Prehensile Tail'});
+				res.augmentations.push({name: 'Unusual Bodyhair'});
+				break;
+
+			case 'Koborokuru':
+				res.attributes.body += 1;
+				res.min_attributes.body += 1;
+				res.max_attributes.body += 1;
+				res.attributes.strength += 1;
+				res.min_attributes.strength += 1;
+				res.max_attributes.strength += 1;
+				res.attributes.will += 1;
+				res.min_attributes.will += 1;
+				res.max_attributes.will += 1;
+				res.augmentations.push({name: 'Celerity'});
+				res.augmentations.push({name: 'Pathogen Resistance 1'});
+				res.augmentations.push({name: 'Toxin Resistance 1'});
+				res.augmentations.push({name: 'Thermographic Vision'});
+				res.augmentations.push({name: 'Unusual Hair'});
+				break;
+
+			case 'Menehune':
+				res.attributes.body += 1;
+				res.min_attributes.body += 1;
+				res.max_attributes.body += 1;
+				res.attributes.agility += 1;
+				res.min_attributes.agility += 1;
+				res.max_attributes.agility += 1;
+				res.attributes.reaction += -1;
+				res.max_attributes.reaction += -1;
+				res.attributes.strength += 1;
+				res.min_attributes.strength += 1;
+				res.max_attributes.strength += 1;
+				res.augmentations.push({name: 'Pathogen Resistance 1'});
+				res.augmentations.push({name: 'Toxin Resistance 1'});
+				res.augmentations.push({name: 'Thermographic Vision'});
+				res.augmentations.push({name: 'Underwater Vision'});
+				break;
+
+			//TODO: Complete attribute list
+			case 'Querx':
+				break;
+
+			case 'Dalakiton':
+				break;
+
+			case 'Dryade':
+				break;
+
+			case 'Night One':
+				break;
+
+			case 'Wakyambi':
+				break;
+
+			case 'Xapiri Thepe':
+				break;
+
+			case 'Nartaki':
+				break;
+
+			case 'Hobgoblin':
+				break;
+
+			case 'Ogre':
+				break;
+
+			case 'Oni':
+				break;
+
+			case 'Satyr':
+				break;
+
+			case 'Cyclops':
+				break;
+
+			case 'Fomori':
+				break;
+
+			case 'Giant':
+				break;
+
+			case 'Minotaur':
+				break;
+
+			case 'Vampire':
+				break;
+
+			case 'Nosferatu':
+				break;
+
+			case 'Banshee':
+				break;
+
+			case 'Harvester':
+				break;
+
+			case 'Goblin':
+				break;
+
+			case 'Gnawer':
+				break;
+
+			case 'Wendigo':
+				break;
+
+			case 'Grendel':
+				break;
+
+			case 'Fomoraig':
+				break;
+
+			case 'Mutaqua':
+				break;
+
+			case 'Pixie':
 				break;
 
 			default:
-				console.log('ERROR: get_metatype_adjustment() with no known metatype');
+				console.log('ERROR: get_metatype_adjustment() with no known metatype (' + race + ')');
 				res = false;
 				break;
 		}

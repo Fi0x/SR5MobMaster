@@ -398,6 +398,11 @@ function view_generator()
 		$template.find('.section_tabs').tabs('option', 'active', 2);
 	});
 
+	$template.find('#overview button.generate_critter').on('click', function()
+	{
+		$template.find('.section_tabs').tabs('option', 'active', 2);
+	});
+
 	$template.find('#generate_minion').on('click', function()
 	{
 		var options = {};
@@ -758,6 +763,161 @@ function view_generator()
 		});
 	});
 
+	$template.find('#generate_critter').on('click', function()
+	{
+		var options = {}, i, mob_name = 'Mob #' + roll.dval(10) + roll.dval(10) + ':', mob = [], special, mook;
+
+		if ($('.main_content #mob_generator .entry_form input[name="name"]').val().trim())
+		{
+			mob_name = $('.main_content #mob_generator .entry_form input[name="name"]').val().trim();
+		}
+
+		var mob_count = $('.main_content #mob_generator .entry_form select[name="number"]');
+		mob_count = mob_count.find(':selected').val();
+
+		switch (mob_count)
+		{
+			case 'two_four':
+				mob_count = 1 + roll.dval(3);
+				break;
+
+			case 'three_six':
+				mob_count = 2 + roll.dval(4);
+				break;
+
+			case 'four_ten':
+				mob_count = 3 + roll.dval(7);
+				break;
+
+			default:
+				mob_count = 1;
+				break;
+		}
+
+		if ($('#critter_generator .entry_form select[name="critter_race"] option:selected').val())
+			options.race = $('#critter_generator .entry_form select[name="critter_race"] option:selected').val();
+
+		for (i = 0; i < mob_count; i++)
+		{
+			mook = gen.mook($.extend({}, options));
+			mook.name = mob_name + ' ' + mook.name;
+			mob.push(mook);
+		}
+
+		$template.find('#critter_generator #generated_results').empty();
+
+		for (i = mob.length - 1; i >= 0; i--)
+		{
+			var $mob_entry = $('<div/>').addClass('mob_entry').appendTo($template.find('#critter_generator #generated_results'));
+
+			render.mook($mob_entry, mob[i]);
+		}
+
+		$template.find('#critter_generator #discard_minion').button('enable');
+
+		$template.find('#critter_generator #add_to_cast').button('enable').off('click').click(function()
+		{
+			for (i = mob.length - 1; i >= 0; i--)
+			{
+				storage.set_character(mob[i]);
+			}
+
+			// When we create a new character, go to the full cast
+			storage.set_current_cast_tab(1);
+
+			view_cast();
+		});
+
+		var $popup = render.get_template('add_dialog_mob');
+		$popup.find('button').button();
+
+		var current_tabs = storage.get_cast_tabs();
+
+		// If there aren't additional tabs, remove the first part
+		if (current_tabs.length <= 1)
+		{
+			$popup.find('.existing_tab_wrapper').detach()
+		}
+		else
+		{
+			// Add the other tabs as options
+			for (i = 0; i < current_tabs.length; i++)
+			{
+				if (current_tabs[i].tab_id !== 1)
+				{
+					$('<option/>').attr('value', current_tabs[i].tab_id).html(current_tabs[i].name).appendTo($popup.find('select[name="existing"]'));
+				}
+			}
+
+			// Set the save button to work
+			$popup.find('button[existing]').off('click').click(function()
+			{
+				var tab_id = parseInt($popup.find('select[name="existing"]').val());
+				var npc_data, tab_data;
+				tab_data = storage.get_cast_tab(tab_id);
+
+				for (i = mob.length - 1; i >= 0; i--)
+				{
+					npc_data = storage.set_character(mob[i]);
+					tab_data.characters.push(npc_data.character_id);
+				}
+
+				storage.set_cast_tab(tab_id, tab_data);
+
+				storage.set_current_cast_tab(tab_id);
+				$popup.dialog('close');
+				view_cast();
+			});
+		}
+
+		// Set the save new button to work
+		$popup.find('button[new_tab]').off('click').click(function()
+		{
+			var tab_name = $popup.find('input[new_tab]').val(), tab_id;
+			var npc_data, tab_data;
+
+			if (tab_name === '')
+			{
+				return;
+			}
+
+			tab_id = storage.create_cast_tab(tab_name);
+			tab_data = storage.get_cast_tab(tab_id);
+
+			for (i = mob.length - 1; i >= 0; i--)
+			{
+				npc_data = storage.set_character(mob[i]);
+				tab_data.characters.push(npc_data.character_id);
+			}
+
+			storage.set_cast_tab(tab_id, tab_data);
+			storage.set_current_cast_tab(tab_id);
+			$popup.dialog('close');
+			view_cast();
+		});
+
+		$popup.dialog({
+			autoOpen: false,
+			modal: true,
+			title: 'Add NPCs to specific tab',
+			width: 500,
+			buttons: [
+				{
+					text: "Cancel",
+					click: function() {
+						$(this).dialog( "close" );
+					}
+				}
+			]
+		});
+
+		$template.find('#critter_generator #add_dialog').button('enable').off('click').click(function()
+		{
+			$popup.dialog('open');
+			$popup.find('select').selectmenu();
+		});
+	});
+
 	$template.find('#mob_generator #discard_minion').button('disable').click(function ()
 	{
 		$template.find('#mob_generator #generated_results').empty();
@@ -769,14 +929,27 @@ function view_generator()
 	$template.find('#mob_generator #add_to_cast').button('disable');
 	$template.find('#mob_generator #add_dialog').button('disable');
 
+	$template.find('#critter_generator #discard_minion').button('disable').click(function ()
+	{
+		$template.find('#critter_generator #generated_results').empty();
+		$template.find('#critter_generator #discard_minion').button('disable');
+		$template.find('#critter_generator #add_to_cast').button('disable');
+		$template.find('#critter_generator #add_dialog').button('disable');
+	});
+
+	$template.find('#critter_generator #add_to_cast').button('disable');
+	$template.find('#critter_generator #add_dialog').button('disable');
+
 	// TODO add a reset button to the form to reset all the values to default. Could just call view_generator()
 
 	// Make things pretty!
 	$template.find('select').selectmenu();
 	$template.find('#mob_generator .add_special_types input').checkboxradio();
+	$template.find('#critter_generator .add_special_types input').checkboxradio();
 
 	render.equalize_widths($template.find('.section_tabs #minion_generator .input_row label[equalize]'));
 	render.equalize_widths($template.find('.section_tabs #mob_generator .input_row label[equalize]'));
+	render.equalize_widths($template.find('.section_tabs #critter_generator .input_row label[equalize]'));
 
 	$template.find('.section_tabs').tabs();
 }

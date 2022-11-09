@@ -8,7 +8,7 @@ var gen = {
 
 	_merge_adjustments: function(base, adjust)
 	{
-		var i, attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma'];
+		var i, attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];
 
 		if (!base.hasOwnProperty('professional_description') && adjust.hasOwnProperty('professional_description'))
 		{
@@ -19,7 +19,7 @@ var gen = {
 		{
 			var racial = false;
 
-			if (base.hasOwnProperty('race'))
+			if (base.hasOwnProperty('race') || base.hasOwnProperty('critter_race'))
 				racial = db.get_metatype_adjustment(base.race);
 
 			attributes.forEach(function(att)

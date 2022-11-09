@@ -36,6 +36,44 @@ var db = {
 
 		return res;
 	},
+	// Generate a random critter_race
+	gen_critter_race: function()
+	{
+		//TODO: Replace with critter race
+		var races = new Map();
+		races.set(0.66, 'Human');
+		races.set(0.16, 'Ork');
+		races.set(0.13, 'Elf');
+		races.set(0.02, 'Dwarf');
+		races.set(0.02, 'Troll');
+		races.set(0.01, 'other');
+
+		var r = Math.random(), res, a = 0;
+
+		for(let [key, value] of races)
+		{
+			a += key;
+			if(r >= a)
+				continue;
+
+			res = value;
+			break;
+		}
+
+		if(res === 'other')
+		{
+			var special = ['Gnome', 'Hanuman', 'Koborokuru', 'Menehune',
+				'Dryade', 'Nocturna', 'Wakyambi', 'Xapiri Thepe',
+				'Nartaki',
+				'Hobgoblin', 'Ogre', 'Oni', 'Satyr',
+				'Cyclops', 'Fomorian', 'Giant', 'Minotaur',
+				'Vampire', 'Nosferatu', 'Banshee', 'Harvester', 'Goblin', 'Gnawer', 'Wendigo', 'Grendel', 'Fomoraig', 'Mutaqua',
+				'Centaur', 'Naga', 'Pixie', 'Sasquatch'];
+			res = special[Math.floor(Math.random() * special.length)]
+		}
+
+		return res;
+	},
 
 	get_base_attributes: function(rating)
 	{
@@ -1193,6 +1231,7 @@ var db = {
 
 			switch (options.race)
 			{
+				//TODO: Add cases for all new metatypes
 				case 'Human':
 					res.skills['Throwing Weapons'] = rating + 3;
 					if (rating < 2)
@@ -1279,6 +1318,7 @@ var db = {
 
 			switch (options.race)
 			{
+				//TODO: Add cases for all new metatypes
 				case 'Human':
 					res.attributes.reaction = 2;
 					res.skills.Demolitions = rating + 1;
@@ -1351,6 +1391,7 @@ var db = {
 
 			switch (options.race)
 			{
+				//TODO: Add cases for all new metatypes
 				case 'Human':
 					if (rating > 1)
 					{
@@ -1739,6 +1780,7 @@ var db = {
 
 		switch (race)
 		{
+			//TODO: Add cases for all critter_races
 			case 'Human':
 				res.attributes.edge += 1;
 				res.min_attributes.edge += 1;

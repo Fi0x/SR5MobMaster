@@ -229,6 +229,7 @@
 				<li><a href="#overview">Generator Overview</a></li>
 				<li><a href="#minion_generator">Individual NPC Generator</a></li>
 				<li><a href="#mob_generator">Group of NPCs Generator</a></li>
+                <li><a href="#critter_generator">Critter Generator</a></li>
 			</ul>
 			<div id="overview">
 				<div class="intro">The NPC Generator is the concept that kicked off the creation of these tools. Here, you can easily create a bunch of thugs to harass the party or a high-powered HTR team to flush them out of a corp building.</div>
@@ -238,6 +239,7 @@
 				<div class="intro">These NPCs use the sample grunts in the Core Rulebook as guidelines. They aren't meant to be perfect nor even optimal. Attributes and skill ranks are an approximation of what I considered reasonably good for a given profession and power level. Feel free to take all of these with a grain of salt.</div>
 				<button class="generate_mook">Generate one NPC</button>
 				<button class="generate_mob">Generate a group</button>
+                <button class="generate_critter">Generate a critter-group</button>
 			</div>
 			<div id="minion_generator">
 				<div class="entry_form">
@@ -479,6 +481,80 @@
 					<button id="add_dialog">Add to Specific Tab</button>
 				</div>
 			</div>
+            <div id="critter_generator">
+<!--                TODO: Complete this div for critters-->
+                <div class="entry_form">
+                    <div class="input_row">
+                        <label equalize>Group Name</label>
+                        <input name="name" placeholder="Random Critter"/>
+                    </div>
+
+                    <div class="input_row">
+                        <label equalize>Number</label>
+                        <select name="number">
+                            <option value="two_four">2 - 4 critters</option>
+                            <option value="three_six">3 - 6 critters</option>
+                            <option value="four_ten">4 - 10 critters</option>
+                        </select>
+                    </div>
+
+                    <div class="input_row">
+                        <label equalize>Race</label>
+                        <select name="critter_race">
+<!--                            TODO: Replace the old list with critters-->
+                            <option value="">- Individually Random</option>
+                            <option value="Human">All Human</option>
+                            <option value="Elf">All Elf</option>
+                            <option value="Dwarf">All Dwarf</option>
+                            <option value="Ork">All Ork</option>
+                            <option value="Troll">All Troll</option>
+                            <option value="Gnome">All Gnome</option>
+                            <option value="Hanuman">All Hanuman</option>
+                            <option value="Koborokuru">All Koborokuru</option>
+                            <option value="Menehune">All Menehune</option>
+                            <option value="Dryade">All Dryade</option>
+                            <option value="Nocturna">All Nocturna</option>
+                            <option value="Wakyambi">All Wakyambi</option>
+                            <option value="Xapiri Thepe">All Xapiri Thepe</option>
+                            <option value="Nartaki">All Nartaki</option>
+                            <option value="Hobgoblin">All Hobgoblin</option>
+                            <option value="Ogre">All Ogre</option>
+                            <option value="Oni">All Oni</option>
+                            <option value="Satyr">All Satyr</option>
+                            <option value="Cyclops">All Cyclops</option>
+                            <option value="Fomorian">All Fomorian</option>
+                            <option value="Giant">All Giant</option>
+                            <option value="Minotaur">All Minotaur</option>
+                            <option value="Vampire">All Vampire</option>
+                            <option value="Nosferatu">All Nosferatu</option>
+                            <option value="Banshee">All Banshee</option>
+                            <option value="Harvester">All Harvester</option>
+                            <option value="Goblin">All Goblin</option>
+                            <option value="Gnawer">All Gnawer</option>
+                            <option value="Wendigo">All Wendigo</option>
+                            <option value="Grendel">All Grendel</option>
+                            <option value="Fomoraig">All Fomoraig</option>
+                            <option value="Mutaqua">All Mutaqua</option>
+                            <option value="Centaur">All Centaur</option>
+                            <option value="Naga">All Naga</option>
+                            <option value="Pixie">All Pixie</option>
+                            <option value="Sasquatch">All Sasquatch</option>
+                        </select>
+                    </div>
+
+                    <div class="spacer_20"></div>
+
+                    <button id="generate_critter">Generate Group</button>
+
+                    <div id="generated_results"></div>
+
+                    <button id="discard_minion">Discard All</button>
+
+                    <button id="add_to_cast">Add all to Cast</button>
+
+                    <button id="add_dialog">Add to Specific Tab</button>
+                </div>
+            </div>
 		</div>
 	</div>
 
@@ -736,6 +812,7 @@
 		</div>
 	</div>
 
+<!--    TODO: Maybe duplicate for critters-->
 	<div template="render__edit_npc" class="display_npc_wrapper edit_npc_wrapper">
 		<div class="controls">
 			<button class="big_button save"><span title="Save Changes" class="ui-icon ui-icon-disk"></span></button>

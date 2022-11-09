@@ -280,6 +280,35 @@ div[template_holder]
 	text-align: left;
 }
 
+#critter_generator .entry_form .input_row > label[equalize]
+{
+	vertical-align: top;
+}
+
+#critter_generator .entry_form #generated_results
+{
+	width: 650px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#critter_generator .entry_form #generated_results .mob_entry:not(:first-child)
+{
+	margin-top: 10px;
+}
+
+#critter_generator .entry_form .add_special_types
+{
+	display: inline-block;
+}
+
+#critter_generator .entry_form .add_special_types label
+{
+	font-size: 0.75em;
+	display: block;
+	text-align: left;
+}
+
 .display_npc_wrapper
 {
 	border: 1px solid #ccee00;

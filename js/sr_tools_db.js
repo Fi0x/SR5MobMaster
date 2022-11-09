@@ -12,13 +12,12 @@ var db = {
 
 		var r = Math.random(), res;
 
-		for(var i = 0, a = 0; i < races.size; i++)
+		for(let [key, value] of races)
 		{
-			a += races[i].key;
-			if(r >= a)
+			if(r >= key)
 				continue;
 
-			res = races[i].value;
+			res = value;
 			break;
 		}
 

@@ -400,7 +400,7 @@ function view_generator()
 
 	$template.find('#overview button.generate_critter').on('click', function()
 	{
-		$template.find('.section_tabs').tabs('option', 'active', 2);
+		$template.find('.section_tabs').tabs('option', 'active', 3);
 	});
 
 	$template.find('#generate_minion').on('click', function()
@@ -765,61 +765,65 @@ function view_generator()
 
 	$template.find('#generate_critter').on('click', function()
 	{
-		var options = {}, i, mob_name = 'Mob #' + roll.dval(10) + roll.dval(10) + ':', mob = [], special, mook;
+		var options = {}, i, critter_name = 'Critters #' + roll.dval(10) + roll.dval(10) + ':', group = [], special, critter;
 
-		if ($('.main_content #mob_generator .entry_form input[name="name"]').val().trim())
+		if ($('.main_content #critter_generator .entry_form input[name="name"]').val().trim())
 		{
-			mob_name = $('.main_content #mob_generator .entry_form input[name="name"]').val().trim();
+			critter_name = $('.main_content #critter_generator .entry_form input[name="name"]').val().trim();
 		}
 
-		var mob_count = $('.main_content #mob_generator .entry_form select[name="number"]');
-		mob_count = mob_count.find(':selected').val();
+		var critter_count = $('.main_content #critter_generator .entry_form select[name="number"]');
+		critter_count = critter_count.find(':selected').val();
 
-		switch (mob_count)
+		switch (critter_count)
 		{
-			case 'two_four':
-				mob_count = 1 + roll.dval(3);
+			case 'one':
+				critter_count = 1;
+				break;
+
+			case 'two':
+				critter_count = 2;
 				break;
 
 			case 'three_six':
-				mob_count = 2 + roll.dval(4);
+				critter_count = 2 + roll.dval(4);
 				break;
 
 			case 'four_ten':
-				mob_count = 3 + roll.dval(7);
+				critter_count = 3 + roll.dval(7);
 				break;
 
 			default:
-				mob_count = 1;
+				critter_count = 1;
 				break;
 		}
 
 		if ($('#critter_generator .entry_form select[name="critter_race"] option:selected').val())
 			options.race = $('#critter_generator .entry_form select[name="critter_race"] option:selected').val();
 
-		for (i = 0; i < mob_count; i++)
+		for (i = 0; i < critter_count; i++)
 		{
-			mook = gen.mook($.extend({}, options));
-			mook.name = mob_name + ' ' + mook.name;
-			mob.push(mook);
+			critter = gen.critter($.extend({}, options));
+			critter.name = critter_name + ' ' + critter.name;
+			group.push(critter);
 		}
 
 		$template.find('#critter_generator #generated_results').empty();
 
-		for (i = mob.length - 1; i >= 0; i--)
+		for (i = group.length - 1; i >= 0; i--)
 		{
-			var $mob_entry = $('<div/>').addClass('mob_entry').appendTo($template.find('#critter_generator #generated_results'));
+			var $critter_entry = $('<div/>').addClass('critter_entry').appendTo($template.find('#critter_generator #generated_results'));
 
-			render.mook($mob_entry, mob[i]);
+			render.critter($critter_entry, group[i]);
 		}
 
 		$template.find('#critter_generator #discard_minion').button('enable');
 
 		$template.find('#critter_generator #add_to_cast').button('enable').off('click').click(function()
 		{
-			for (i = mob.length - 1; i >= 0; i--)
+			for (i = group.length - 1; i >= 0; i--)
 			{
-				storage.set_character(mob[i]);
+				storage.set_character(group[i]);
 			}
 
 			// When we create a new character, go to the full cast
@@ -856,9 +860,9 @@ function view_generator()
 				var npc_data, tab_data;
 				tab_data = storage.get_cast_tab(tab_id);
 
-				for (i = mob.length - 1; i >= 0; i--)
+				for (i = group.length - 1; i >= 0; i--)
 				{
-					npc_data = storage.set_character(mob[i]);
+					npc_data = storage.set_character(group[i]);
 					tab_data.characters.push(npc_data.character_id);
 				}
 
@@ -884,9 +888,9 @@ function view_generator()
 			tab_id = storage.create_cast_tab(tab_name);
 			tab_data = storage.get_cast_tab(tab_id);
 
-			for (i = mob.length - 1; i >= 0; i--)
+			for (i = group.length - 1; i >= 0; i--)
 			{
-				npc_data = storage.set_character(mob[i]);
+				npc_data = storage.set_character(group[i]);
 				tab_data.characters.push(npc_data.character_id);
 			}
 

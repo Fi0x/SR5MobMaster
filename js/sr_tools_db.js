@@ -39,14 +39,17 @@ var db = {
 	// Generate a random critter_race
 	gen_critter_race: function()
 	{
-		//TODO: Replace with critter race
 		var races = new Map();
-		races.set(0.66, 'Human');
-		races.set(0.16, 'Ork');
-		races.set(0.13, 'Elf');
-		races.set(0.02, 'Dwarf');
-		races.set(0.02, 'Troll');
-		races.set(0.01, 'other');
+		races.set(0.10, '-Unawakened Animal');
+		races.set(0.10, '-Reptiles');
+		races.set(0.05, '-Dracoforms');
+		races.set(0.15, '-Amphibians');
+		races.set(0.15, '-Fishes');
+		races.set(0.20, '-Mammals');
+		races.set(0.10, '-Birds');
+		races.set(0.10, '-Insects');
+		races.set(0.10, '-Arachnids');
+		races.set(0.10, '-Other');
 
 		var r = Math.random(), res, a = 0;
 
@@ -60,16 +63,62 @@ var db = {
 			break;
 		}
 
-		if(res === 'other')
+		switch (res)
 		{
-			var special = ['Gnome', 'Hanuman', 'Koborokuru', 'Menehune',
-				'Dryade', 'Nocturna', 'Wakyambi', 'Xapiri Thepe',
-				'Nartaki',
-				'Hobgoblin', 'Ogre', 'Oni', 'Satyr',
-				'Cyclops', 'Fomorian', 'Giant', 'Minotaur',
-				'Vampire', 'Nosferatu', 'Banshee', 'Harvester', 'Goblin', 'Gnawer', 'Wendigo', 'Grendel', 'Fomoraig', 'Mutaqua',
-				'Centaur', 'Naga', 'Pixie', 'Sasquatch'];
-			res = special[Math.floor(Math.random() * special.length)]
+			case '-Unawakened Animal':
+				var unawakened = ['Alligator', 'Bat', 'Bear', 'Cat', 'Wild Cat', 'Cobra', 'Deer', 'Large Dog', 'Small Dog',
+					'Elephant', 'Fox', 'Goat', 'Green Mamba', 'Horse', 'Leopard', 'Python', 'Rat', 'Rhinoceros',
+					'Seal', 'Shark', 'Large Shark', 'Tiger', 'Wolf', 'Barracuda', 'Boar'];
+				res = unawakened[Math.floor(Math.random() * unawakened.length)]
+				break;
+			case '-Reptiles':
+				var reptiles = ['Afanc', 'Aitvaras', 'Ammit', 'Basilisk', 'Rock Lizard', 'Ekyelebenle', 'Gila Demon', 'Gomatia',
+					'Dog Asp', 'Lambton Lizard', 'Mimic Snake', 'Sea Serpent (Saltwater)', 'Sea Serpent (Freshwater)', 'Deathrattle', 'Ahi'];
+				res = reptiles[Math.floor(Math.random() * reptiles.length)]
+				break;
+			case '-Dracoforms':
+				var dracoforms = ['Chimera', 'Drake (Ice)', 'Drake (Fire)', 'Gorgone', 'Wyvern'];
+				res = dracoforms[Math.floor(Math.random() * dracoforms.length)]
+				break;
+			case '-Amphibians':
+				var amphibians = ['Hellbender', 'Nimues Salamander', 'Stone Toad'];
+				res = amphibians[Math.floor(Math.random() * amphibians.length)]
+				break;
+			case '-Fishes':
+				var fishes = ['Megalodon', 'Spitting Pike', 'Devil Jack Diamond', 'Torpedo Shark'];
+				res = fishes[Math.floor(Math.random() * fishes.length)]
+				break;
+			case '-Mammals':
+				var mammals = ['Aardwolf', 'Agropelter', 'Talis Cat', 'Anwuma Bavole', 'Asonwu', 'Bahari', 'Bandit', 'Crested Barbarian',
+					'Barghest', 'Behemoth', 'Greater Unicorn', 'Blackberry Cat', 'Blink Sloth', 'Blood Monkey', 'Bombardier', 'Borax Burro',
+					'Bulldog Stoat', 'Quicksilver Mongoose', 'Demon Rat', 'Unicorn', 'Electric Marten', 'Enwontzane', 'Drop Bear', 'Fenrir Wolf',
+					'Flame Jackal', 'Gabriel Hound', 'Golden Boar', 'Burrowing Beaver', 'Greater Armadillo', 'Grandfather Elk', 'Harpy',
+					'Humped Horse', 'Hell Hound', 'Hellcow', 'Horned Bear', 'Century Ferret', 'Cactus Cat', 'Meistersinger', 'Juggernaut',
+					'Munchkin', 'Embracer', 'Pegasus', 'Peryton', 'Piasma', 'Greater Wolverine', 'Red Deer Unicorn', 'Saber-Tooth Cat',
+					'Shaman Lion', 'Shadowhound', 'Snow Moose', 'Black Annis', 'Bogie', 'Sea Wolf', 'Shasta Deer', 'Storm Dolphin', 'Tasmanian Tiger',
+					'Devil Rat', 'Water Buffalo Unicorn', 'Wild Minotaur', 'Wolly Mammoth', 'Cerberus Hound', 'Goat Unicorn', 'Ghoul', 'Angel Squirrel',
+					'Bastet'];
+				res = mammals[Math.floor(Math.random() * mammals.length)]
+				break;
+			case '-Birds':
+				var birds = ['Eyekiller', 'Blood Kite', 'Oracle Owl', 'Thunderbird', 'Scintillant Albatross', 'Emperor Eagle', 'Lesser Thunderbird',
+					'Merlin Hawk', 'Phoenix', 'Lesser Roc', 'Siberian Firebird', 'Strix', 'Stormcrow', 'Stymphalian', 'Cockatrice', 'Deathspiral Butterfly'];
+				res = birds[Math.floor(Math.random() * birds.length)]
+				break;
+			case '-Insects':
+				var insects = ['Alufye', 'Ghede Fly', 'Jauchekäfer', 'Leerenwespe', 'Siberian Bee', 'Wyrd Mantis', 'Amphora Mite'];
+				res = insects[Math.floor(Math.random() * insects.length)]
+				break;
+			case '-Arachnids':
+				var arachnids = ['Spider Beast', 'Nova Scorpion', 'Scorpyrine'];
+				res = arachnids[Math.floor(Math.random() * arachnids.length)]
+				break;
+			case '-Other':
+				var other = ['Abrams Lobster', 'Chupacabra', 'Each-Uisge', 'Fideal', 'Incubus', 'Kraken', 'Siren', 'Rockworm', 'Gargoyle',
+					'European Gargoyle', 'Fiji Mermaid', 'Kludde', 'Mermaid', 'Sea Leech', 'Leviathan', 'Bandersnatch', 'Dour', 'Shapeshifter',
+					'Troglodyte', 'Merrow', 'Naga', 'Wodewose', 'Protean', 'Griffin', 'Will o Whisp', 'Mantichoras', 'Shadow Crab'];
+				res = other[Math.floor(Math.random() * other.length)]
+				break;
 		}
 
 		return res;
@@ -1769,6 +1818,7 @@ var db = {
 		return res;
 	},
 
+	//TODO: Create a critter version
 	get_metatype_adjustment: function(race)
 	{
 		var res = {
@@ -1780,7 +1830,6 @@ var db = {
 
 		switch (race)
 		{
-			//TODO: Add cases for all critter_races
 			case 'Human':
 				res.attributes.edge += 1;
 				res.min_attributes.edge += 1;

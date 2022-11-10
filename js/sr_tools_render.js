@@ -30,6 +30,35 @@ var render = {
 		}
 	},
 
+	critter: function($target, data, options)
+	{
+		if (options === undefined)
+		{
+			options = {};
+		}
+
+		options = $.extend({}, {
+			mode: 'display'
+		}, options);
+
+		switch (options.mode)
+		{
+			default:
+			case 'display': // Default view, includes icons to convert to action and edit modes
+				this.mook_for_display($target, data, options);
+				break;
+			case 'action': // This is similar to display but includes buttons to roll most skills and initiative
+				this.mook_for_action($target, data, options);
+				break;
+			case 'edit': // Lots of dropdowns and widgets to change the NPC
+				this.mook_for_edit($target, data, options);//TODO: Maybe create a new critter version
+				break;
+			case 'print': // Strictly for printing to PDF or other non-interactive modes
+				this.mook_for_print($target, data, options);
+				break;
+		}
+	},
+
 	mook_for_print: function($target, data, options)
 	{
 		// TODO for now, just use the existing one

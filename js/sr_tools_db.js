@@ -651,6 +651,7 @@ var db = {
 			special: {}
 		};
 
+		//TODO: check if all of these special types work correctly
 		if (special_type === 'LT')
 		{
 			switch (options.professional_type)

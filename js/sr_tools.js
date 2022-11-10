@@ -648,6 +648,38 @@ function view_generator()
 			mook.name = mob_name + ' ' + mook.name;
 			mob.push(mook);
 		}
+		if ($('#mob_generator .entry_form input[name="special_shaman"]').prop('checked'))
+		{
+			special = $.extend({}, options);
+			special.is_shaman = true;
+			mook = gen.mook(special);
+			mook.name = mob_name + ' ' + mook.name;
+			mob.push(mook);
+		}
+		if ($('#mob_generator .entry_form input[name="special_tank"]').prop('checked'))
+		{
+			special = $.extend({}, options);
+			special.is_tank = true;
+			mook = gen.mook(special);
+			mook.name = mob_name + ' ' + mook.name;
+			mob.push(mook);
+		}
+		if ($('#mob_generator .entry_form input[name="special_samurai"]').prop('checked'))
+		{
+			special = $.extend({}, options);
+			special.is_samurai = true;
+			mook = gen.mook(special);
+			mook.name = mob_name + ' ' + mook.name;
+			mob.push(mook);
+		}
+		if ($('#mob_generator .entry_form input[name="special_gunbunny"]').prop('checked'))
+		{
+			special = $.extend({}, options);
+			special.is_gunbunny = true;
+			mook = gen.mook(special);
+			mook.name = mob_name + ' ' + mook.name;
+			mob.push(mook);
+		}
 
 		$template.find('#mob_generator #generated_results').empty();
 

@@ -59,12 +59,14 @@ var render = {
 		}
 	},
 
+	//TODO: Create a critter version
 	mook_for_print: function($target, data, options)
 	{
 		// TODO for now, just use the existing one
 		this.mook_for_display($target, data, options);
 	},
 
+	//TODO: Create a critter version
 	mook_for_edit: function($target, data, options)
 	{
 		var i, $mook = render.get_template('render__edit_npc');
@@ -763,6 +765,7 @@ var render = {
 		$mook.find('.other_information .commlink .value option[value="' + data.commlink + '"]').prop('selected', true);
 	},
 
+	//TODO: Create a critter version
 	mook_for_action: function($target, data, options)
 	{
 		var i, $mook = render.get_template('render__action_npc'), wp = {penalty: 0};
@@ -1605,6 +1608,7 @@ var render = {
 		}
 	},
 
+	//TODO: Create a critter version
 	mook_for_display: function($target, data, options)
 	{
 		// Given a target, nuke all contents and make a pretty rendering attached to the target

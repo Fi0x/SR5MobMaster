@@ -245,7 +245,7 @@ var gen = {
 
 		var mook = {
 			name: options.name,
-			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0},
+			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0, edge: 0, magic: 0, resonance: 0},
 			skills: {},
 			knowledge_skills: {},
 			qualities: {
@@ -500,37 +500,25 @@ var gen = {
 			notes: null
 		}, options);
 
-		var mook = {
+		var critter = {
 			name: options.name,
-			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0},
+			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0, edge: 0, magic: 0, resonance: 0},
 			skills: {},
-			knowledge_skills: {},
 			qualities: {
 				positive: [],
 				negative: []
 			},
-			weapons: [],
 			armor: [],
-			gear: [],
 			augmentations: [],
 			special: {},
-			commlink: 1,
-			created: new Date().toJSON(),
-			professional_type: options.professional_type
+			created: new Date().toJSON()
 		};
 
 		// Pull in copies from global settings
-		mook.condition_monitor = storage.setting('condition_monitor');
-		mook.wound_penalty = storage.setting('wound_penalty');
+		critter.condition_monitor = storage.setting('condition_monitor');
+		critter.wound_penalty = storage.setting('wound_penalty');
 
-		mook.gender = "";
-		options.professional_rating = roll.dval(5) - 1;
-
-		mook.professional_rating = options.professional_rating;
-
-		var rating_baseline = db.get_base_attributes(options.professional_rating);
-
-		this._merge_adjustments(mook, rating_baseline);
+		critter.gender = "";
 
 		// If we don't have a race, generate one
 		if (options.race === false || options.race.startsWith('-'))
@@ -538,11 +526,11 @@ var gen = {
 			options.race = db.gen_critter_race(options.race);
 		}
 
-		mook.race = options.race;
+		critter.race = options.race;
 		// Get the attribute adjustments from race and apply them
 		var racial_baseline = db.get_metatype_adjustment(options.race);
 
-		this._merge_adjustments(mook, racial_baseline);
+		this._merge_adjustments(critter, racial_baseline);
 
 		// If we don't have a professional type and we aren't a contact, then generate one
 		if (options.professional_type === false)
@@ -553,53 +541,7 @@ var gen = {
 			}
 		}
 
-		if (options.is_contact === false)
-		{
-			mook.professional_type = options.professional_type;
-
-			switch (mook.professional_type)
-			{
-				case 'civilian':
-					mook.professional_description = 'Civilian';
-					break;
-				case 'thug':
-					mook.professional_description = 'Thug';
-					break;
-				case 'ganger':
-					mook.professional_description = 'Gang Member';
-					break;
-				case 'corpsec':
-					mook.professional_description = 'Corporate Security';
-					break;
-				case 'police':
-					mook.professional_description = 'Law Enforcement';
-					break;
-				case 'cultist':
-					mook.professional_description = 'Cultist';
-					break;
-				case 'htr':
-					mook.professional_description = 'High Threat Response';
-					break;
-				case 'specops':
-					mook.professional_description = 'Special Operations';
-					break;
-				case 'mob':
-					mook.professional_description = 'Organized Crime';
-					break;
-			}
-		}
-
-		// Contacts do not have type adjustments, but everyone else does
-		if (options.is_contact)
-		{
-			// TODO I need to deal with generating contacts!
-			// This needs to include some stat adjustments for their rating, plus their type of contact-ness and other helpful things.
-		}
-		else
-		{
-			var type_adjustments = db.get_type_adjustments(options.professional_type, options.professional_rating);
-			this._merge_adjustments(mook, type_adjustments);
-		}
+		critter.professional_description = '';
 
 		// Is this a special type? [LT, adept, mage, decker]
 		var adjustments;
@@ -607,87 +549,11 @@ var gen = {
 		if (options.is_lt)
 		{
 			adjustments = db.get_special_adjustments('LT', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_lt = true;
+			this._merge_adjustments(critter, adjustments);
+			critter.special.is_lt = true;
 		}
 
-		if (options.is_decker)
-		{
-			adjustments = db.get_special_adjustments('Decker', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_decker = true;
-		}
-
-		if (options.is_adept)
-		{
-			adjustments = db.get_special_adjustments('Adept', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_adept = true;
-		}
-
-		if (options.is_mage)
-		{
-			adjustments = db.get_special_adjustments('Mage', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_mage = true;
-		}
-
-		if (options.is_shaman)
-		{
-			adjustments = db.get_special_adjustments('Shaman', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_tank = true;
-		}
-
-		if (options.is_tank)
-		{
-			adjustments = db.get_special_adjustments('Tank', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_tank = true;
-		}
-
-		if (options.is_samurai)
-		{
-			adjustments = db.get_special_adjustments('Samurai', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_tank = true;
-		}
-
-		if (options.is_gunbunny)
-		{
-			adjustments = db.get_special_adjustments('Gunbunny', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_tank = true;
-		}
-
-		if (options.is_johnson)
-		{
-			adjustments = db.get_special_adjustments('Johnson', options);
-			this._merge_adjustments(mook, adjustments);
-			mook.special.is_tank = true;
-		}
-
-		// If this is a Troll who has certain augmentations, they need to lose the Troll Dermal Deposits
-		if (mook.race === 'Troll')
-		{
-			var skin_augments = ['Dermal Plating', 'Orthoskin'];
-
-			var augment = mook.augmentations.filter(function (aug)
-			{
-				return skin_augments.includes(aug.name);
-			});
-
-			if (augment.length > 0)
-			{
-				augment = mook.augmentations.filter(function (aug)
-				{
-					return aug.name !== 'Troll Dermal Deposits';
-				});
-				mook.augmentations = augment;
-			}
-		}
-
-		return mook;
+		return critter;
 	},
 
 	matrix_host: function(options)

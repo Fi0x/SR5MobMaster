@@ -15,7 +15,7 @@ var db = {
 		for(let [key, value] of races)
 		{
 			a += key;
-			if(r >= a)
+			if(r > a)
 				continue;
 
 			res = value;
@@ -37,30 +37,38 @@ var db = {
 		return res;
 	},
 	// Generate a random critter_race
-	gen_critter_race: function()
+	gen_critter_race: function(originalCategory)
 	{
-		var races = new Map();
-		races.set(0.10, '-Unawakened Animal');
-		races.set(0.10, '-Reptiles');
-		races.set(0.05, '-Dracoforms');
-		races.set(0.15, '-Amphibians');
-		races.set(0.15, '-Fishes');
-		races.set(0.20, '-Mammals');
-		races.set(0.10, '-Birds');
-		races.set(0.10, '-Insects');
-		races.set(0.10, '-Arachnids');
-		races.set(0.10, '-Other');
-
-		var r = Math.random(), res, a = 0;
-
-		for(let [key, value] of races)
+		var res;
+		if(originalCategory !== undefined && originalCategory !== false && originalCategory.startsWith('-'))
 		{
-			a += key;
-			if(r >= a)
-				continue;
+			res = originalCategory;
+		}
+		else
+		{
+			var races = new Map();
+			races.set(0.30, '-Mammals');
+			races.set(0.15, '-Amphibians');
+			races.set(0.13, '-Fishes');
+			races.set(0.11, '-Unawakened Animal');
+			races.set(0.10, '-Reptiles');
+			races.set(0.09, '-Birds');
+			races.set(0.07, '-Insects');
+			races.set(0.06, '-Arachnids');
+			races.set(0.05, '-Other');
+			races.set(0.04, '-Dracoforms');
 
-			res = value;
-			break;
+			var r = Math.random(), a = 0;
+
+			for(let [key, value] of races)
+			{
+				a += key;
+				if(r > a)
+					continue;
+
+				res = value;
+				break;
+			}
 		}
 
 		switch (res)

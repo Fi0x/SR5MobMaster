@@ -523,47 +523,8 @@ var gen = {
 		mook.condition_monitor = storage.setting('condition_monitor');
 		mook.wound_penalty = storage.setting('wound_penalty');
 
-		// If we don't have a gender, assign a binary gender.
-		// Will limiting gender to a binary decision piss off some people? Probably yes.
-		// However, the author is not spending time developing a fully politically correct gender-determination system at this time.
-		// If you really want to hear how the author feels about the situation, buy him a beer
-		if (options.gender !== 'Male' && options.gender !== 'Female')
-		{
-			if (options.is_contact)
-			{
-				// Even split
-				if (roll.dval(2) === 2)
-				{
-					mook.gender = 'Female';
-				}
-				else
-				{
-					mook.gender = 'Male';
-				}
-			}
-			else
-			{
-				// Probably not so even
-				if (roll.dval(10) >= 9)
-				{
-					mook.gender = 'Female';
-				}
-				else
-				{
-					mook.gender = 'Male';
-				}
-			}
-		}
-		else
-		{
-			mook.gender = options.gender;
-		}
-
-		// If we don't have a professional rating, then generate a random one from 0-4
-		if (options.professional_rating === -1)
-		{
-			options.professional_rating = roll.dval(5) - 1;
-		}
+		mook.gender = "";
+		options.professional_rating = roll.dval(5) - 1;
 
 		mook.professional_rating = options.professional_rating;
 
@@ -574,7 +535,7 @@ var gen = {
 		// If we don't have a race, generate one
 		if (options.race === false || options.race.startsWith('-'))
 		{
-			options.race = db.gen_race();
+			options.race = db.gen_critter_race(options.race);
 		}
 
 		mook.race = options.race;

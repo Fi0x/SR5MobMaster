@@ -507,6 +507,7 @@ var gen = {
 				positive: [],
 				negative: []
 			},
+			weapons: [],
 			armor: [],
 			augmentations: [],
 			special: {},

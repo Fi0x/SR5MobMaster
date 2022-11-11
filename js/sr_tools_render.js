@@ -819,13 +819,6 @@ var render = {
 				changes_made = true;
 			}
 
-			// Gender
-			if (data.gender !== $critter.find('select[name="gender"]').val().trim())
-			{
-				data.gender = $critter.find('select[name="gender"]').val().trim();
-				changes_made = true;
-			}
-
 			// Race
 			if (data.race !== $critter.find('select[name="race"]').val().trim())
 			{
@@ -899,7 +892,6 @@ var render = {
 		$critter.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
 
 		var attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];
-		var metatype_attributes = db.get_critter_adjustment(data.race);
 
 		attributes.forEach(function(attribute)
 		{
@@ -935,7 +927,6 @@ var render = {
 				resonance: 0
 			};
 			var attributes = Object.keys(differences);
-			var updated_attributes = db.get_critter_adjustment($critter.find('select[name="race"]').val());
 
 			attributes.forEach(function(attr)
 			{
@@ -2860,6 +2851,15 @@ var render = {
 			});
 		}
 
+		if(gear.length > 0)
+		{
+			$critter.find('.information .gear .value').html(gear.join(''));
+		}
+		else
+		{
+			$critter.find('.information .gear').hide();
+		}
+
 		// Adept Powers
 		if (data.special.is_adept === true)
 		{
@@ -3893,6 +3893,15 @@ var render = {
 				entry_text.push('w/' + entry.ammo_type + ' ammo');
 
 			gear.push('<div>' + entry.name + ' [' + entry_text.join(', ') + ']</div>');
+		}
+
+		if(gear.length > 0)
+		{
+			$critter.find('.information .gear .value').html(gear.join(''));
+		}
+		else
+		{
+			$critter.find('.information .gear').hide();
 		}
 
 		// Adept Powers

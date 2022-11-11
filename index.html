@@ -866,6 +866,117 @@
 		</div>
 	</div>
 
+    <div template="render__display_critter" class="display_npc_wrapper">
+        <div class="controls">
+            <button class="tiny_button action"><span title="Action mode" class="ui-icon ui-icon-play"></span></button>
+            <button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
+        </div>
+        <div class="critter_name"></div>
+        <div class="critter_description"></div>
+        <div class="critter_notes"></div>
+        <div class="attribute_names">
+            <div class="attribute_name">BOD</div>
+            <div class="attribute_name">AGI</div>
+            <div class="attribute_name">REA</div>
+            <div class="attribute_name">STR</div>
+            <div class="attribute_name">WIL</div>
+            <div class="attribute_name">LOG</div>
+            <div class="attribute_name">INT</div>
+            <div class="attribute_name">CHA</div>
+            <div class="attribute_name">EDG</div>
+            <div class="attribute_name">ESS</div>
+            <div class="attribute_name">MAG</div>
+            <div class="attribute_name">RES</div>
+        </div>
+
+        <div class="attribute_values">
+            <div class="attribute_value body"></div>
+            <div class="attribute_value agility"></div>
+            <div class="attribute_value reaction"></div>
+            <div class="attribute_value strength"></div>
+            <div class="attribute_value will"></div>
+            <div class="attribute_value logic"></div>
+            <div class="attribute_value intuition"></div>
+            <div class="attribute_value charisma"></div>
+            <div class="attribute_value edge"></div>
+            <div class="attribute_value essence"></div>
+            <div class="attribute_value magic"></div>
+            <div class="attribute_value resonance"></div>
+        </div>
+
+        <div class="information">
+            <div class="initiative">
+                <label>Initiative</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="astral_initiative">
+                <label>Astral Initiative</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="matrix_initiative">
+                <label>Matrix Initiative (Hot VR)</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="damage_resistance">
+                <label>Damage Resistance</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="condition_monitor">
+                <label>Condition Monitor</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="limits">
+                <label>Limits</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="qualities">
+                <label>Qualities</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="initiate_grade">
+                <label>Initiate Grade</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="skills">
+                <label>Skills</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="augments">
+                <label>Augmentations</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="armor">
+                <label>Armor</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="spells">
+                <label>Spells</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="powers">
+                <label>Powers</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="programs">
+                <label>Programs</label>
+                <div class="value"></div>
+            </div>
+        </div>
+    </div>
+
 	<div template="render__action_npc" class="display_npc_wrapper action_npc_wrapper">
 		<div class="controls">
 			<button class="tiny_button display"><span title="Display mode" class="ui-icon ui-icon-search"></span></button>
@@ -1004,7 +1115,139 @@
 		</div>
 	</div>
 
-<!--    TODO: Maybe duplicate for critters-->
+    <div template="render__action_critter" class="display_npc_wrapper action_npc_wrapper">
+        <div class="controls">
+            <button class="tiny_button display"><span title="Display mode" class="ui-icon ui-icon-search"></span></button>
+            <button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
+        </div>
+        <div class="critter_name"></div>
+        <div class="critter_description"></div>
+        <div class="critter_notes"></div>
+        <div class="attribute_names">
+            <div class="attribute_name">BOD</div>
+            <div class="attribute_name">AGI</div>
+            <div class="attribute_name">REA</div>
+            <div class="attribute_name">STR</div>
+            <div class="attribute_name">WIL</div>
+            <div class="attribute_name">LOG</div>
+            <div class="attribute_name">INT</div>
+            <div class="attribute_name">CHA</div>
+            <div class="attribute_name">EDG</div>
+            <div class="attribute_name">ESS</div>
+            <div class="attribute_name">MAG</div>
+            <div class="attribute_name">RES</div>
+        </div>
+        <div class="attribute_values">
+            <div class="attribute_value body"></div>
+            <div class="attribute_value agility"></div>
+            <div class="attribute_value reaction"></div>
+            <div class="attribute_value strength"></div>
+            <div class="attribute_value will"></div>
+            <div class="attribute_value logic"></div>
+            <div class="attribute_value intuition"></div>
+            <div class="attribute_value charisma"></div>
+            <div class="attribute_value edge"></div>
+            <div class="attribute_value essence"></div>
+            <div class="attribute_value magic"></div>
+            <div class="attribute_value resonance"></div>
+        </div>
+        <div class="information">
+            <div class="initiative">
+                <label>Initiative</label>
+                <div class="rollable">
+                    <div class="value"></div>
+                    <button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+                    <div class="result"></div>
+                </div>
+            </div>
+
+            <div class="astral_initiative">
+                <label>Astral Initiative</label>
+                <div class="rollable">
+                    <div class="value"></div>
+                    <button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+                    <div class="result"></div>
+                </div>
+            </div>
+
+            <div class="matrix_initiative">
+                <label>Matrix Initiative (Hot VR)</label>
+                <div class="rollable">
+                    <div class="value"></div>
+                    <button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+                    <div class="result"></div>
+                </div>
+            </div>
+
+            <div class="dodge">
+                <label>Dodge Roll</label>
+                <div class="rollable">
+                    <div class="value"></div>
+                    <button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+                    <div class="result"></div>
+                </div>
+            </div>
+
+            <div class="damage_resistance">
+                <label>Damage Resistance</label>
+                <div class="rollable">
+                    <div class="value"></div>
+                    <button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+                    <div class="result"></div>
+                </div>
+            </div>
+
+            <div class="condition_monitor">
+                <label>Condition Monitor</label>
+            </div>
+
+            <div class="limits">
+                <label>Limits</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="qualities">
+                <label>Qualities</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="initiate_grade">
+                <label>Initiate Grade</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="skills">
+                <label>Skills</label>
+                <div class="skill_list"></div>
+            </div>
+
+            <div class="augments">
+                <label>Augmentations</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="armor">
+                <label>Armor</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="spells">
+                <label>Spells</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="powers">
+                <label>Powers</label>
+                <div class="value"></div>
+            </div>
+
+            <div class="programs">
+                <label>Programs</label>
+                <div class="value"></div>
+            </div>
+        </div>
+    </div>
+
 	<div template="render__edit_npc" class="display_npc_wrapper edit_npc_wrapper">
 		<div class="controls">
 			<button class="big_button save"><span title="Save Changes" class="ui-icon ui-icon-disk"></span></button>
@@ -1020,42 +1263,50 @@
 				<option value="Female">Female</option>
 			</select>
 			<select name="race">
-				<option value="Human">Human</option>
-				<option value="Elf">Elf</option>
-				<option value="Dwarf">Dwarf</option>
-				<option value="Ork">Ork</option>
-				<option value="Troll">Troll</option>
-                <option value="Gnome">Gnome</option>
-                <option value="Hanuman">Hanuman</option>
-                <option value="Koborokuru">Koborokuru</option>
-                <option value="Menehune">Menehune</option>
-                <option value="Dryade">Dryade</option>
-                <option value="Nocturna">Nocturna</option>
-                <option value="Wakyambi">Wakyambi</option>
-                <option value="Xapiri Thepe">Xapiri Thepe</option>
-                <option value="Nartaki">Nartaki</option>
-                <option value="Hobgoblin">Hobgoblin</option>
-                <option value="Ogre">Ogre</option>
-                <option value="Oni">Oni</option>
-                <option value="Satyr">Satyr</option>
-                <option value="Cyclops">Cyclops</option>
-                <option value="Fomorian">Fomorian</option>
-                <option value="Giant">Giant</option>
-                <option value="Minotaur">Minotaur</option>
-                <option value="Vampire">Vampire</option>
-                <option value="Nosferatu">Nosferatu</option>
-                <option value="Banshee">Banshee</option>
-                <option value="Harvester">Harvester</option>
-                <option value="Goblin">Goblin</option>
-                <option value="Gnawer">Gnawer</option>
-                <option value="Wendigo">Wendigo</option>
-                <option value="Grendel">Grendel</option>
-                <option value="Fomoraig">Fomoraig</option>
-                <option value="Mutaqua">Mutaqua</option>
-                <option value="Centaur">Centaur</option>
-                <option value="Naga">Naga</option>
-                <option value="Pixie">Pixie</option>
-                <option value="Sasquatch">Sasquatch</option>
+                <optgroup label="Default Metatypes">
+                    <option value="Human">Human</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Ork">Ork</option>
+                    <option value="Troll">Troll</option>
+                </optgroup>
+                <optgroup label="Sub-Species">
+                    <option value="Gnome">Gnome</option>
+                    <option value="Hanuman">Hanuman</option>
+                    <option value="Koborokuru">Koborokuru</option>
+                    <option value="Menehune">Menehune</option>
+                    <option value="Dryade">Dryade</option>
+                    <option value="Nocturna">Nocturna</option>
+                    <option value="Wakyambi">Wakyambi</option>
+                    <option value="Xapiri Thepe">Xapiri Thepe</option>
+                    <option value="Nartaki">Nartaki</option>
+                    <option value="Hobgoblin">Hobgoblin</option>
+                    <option value="Ogre">Ogre</option>
+                    <option value="Oni">Oni</option>
+                    <option value="Satyr">Satyr</option>
+                    <option value="Cyclops">Cyclops</option>
+                    <option value="Fomorian">Fomorian</option>
+                    <option value="Giant">Giant</option>
+                    <option value="Minotaur">Minotaur</option>
+                </optgroup>
+                <optgroup label="Infected Ones">
+                    <option value="Vampire">Vampire</option>
+                    <option value="Nosferatu">Nosferatu</option>
+                    <option value="Banshee">Banshee</option>
+                    <option value="Harvester">Harvester</option>
+                    <option value="Goblin">Goblin</option>
+                    <option value="Gnawer">Gnawer</option>
+                    <option value="Wendigo">Wendigo</option>
+                    <option value="Grendel">Grendel</option>
+                    <option value="Fomoraig">Fomoraig</option>
+                    <option value="Mutaqua">Mutaqua</option>
+                </optgroup>
+                <optgroup label="Special Races">
+                    <option value="Centaur">Centaur</option>
+                    <option value="Naga">Naga</option>
+                    <option value="Pixie">Pixie</option>
+                    <option value="Sasquatch">Sasquatch</option>
+                </optgroup>
 			</select>
 		</div>
 		<div class="attribute_names">
@@ -1157,6 +1408,141 @@
 			</div>
 		</div>
 	</div>
+
+    <div template="render__edit_critter" class="display_npc_wrapper edit_npc_wrapper">
+        <div class="controls">
+            <button class="big_button save"><span title="Save Changes" class="ui-icon ui-icon-disk"></span></button>
+            <button class="big_button revert"><span title="Revert Changes" class="ui-icon ui-icon-cancel"></span></button>
+        </div>
+        <div class="critter_name">
+            <input id="name" placeholder="Name..."/>
+        </div>
+        <div class="critter_description">
+            <select name="gender">
+                <option value=""></option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <select name="race">
+<!--                TODO: Change to critter version-->
+                <option value="Human">Human</option>
+                <option value="Elf">Elf</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Ork">Ork</option>
+                <option value="Troll">Troll</option>
+                <option value="Gnome">Gnome</option>
+                <option value="Hanuman">Hanuman</option>
+                <option value="Koborokuru">Koborokuru</option>
+                <option value="Menehune">Menehune</option>
+                <option value="Dryade">Dryade</option>
+                <option value="Nocturna">Nocturna</option>
+                <option value="Wakyambi">Wakyambi</option>
+                <option value="Xapiri Thepe">Xapiri Thepe</option>
+                <option value="Nartaki">Nartaki</option>
+                <option value="Hobgoblin">Hobgoblin</option>
+                <option value="Ogre">Ogre</option>
+                <option value="Oni">Oni</option>
+                <option value="Satyr">Satyr</option>
+                <option value="Cyclops">Cyclops</option>
+                <option value="Fomorian">Fomorian</option>
+                <option value="Giant">Giant</option>
+                <option value="Minotaur">Minotaur</option>
+                <option value="Vampire">Vampire</option>
+                <option value="Nosferatu">Nosferatu</option>
+                <option value="Banshee">Banshee</option>
+                <option value="Harvester">Harvester</option>
+                <option value="Goblin">Goblin</option>
+                <option value="Gnawer">Gnawer</option>
+                <option value="Wendigo">Wendigo</option>
+                <option value="Grendel">Grendel</option>
+                <option value="Fomoraig">Fomoraig</option>
+                <option value="Mutaqua">Mutaqua</option>
+                <option value="Centaur">Centaur</option>
+                <option value="Naga">Naga</option>
+                <option value="Pixie">Pixie</option>
+                <option value="Sasquatch">Sasquatch</option>
+            </select>
+        </div>
+        <div class="attribute_names">
+            <div class="attribute_name body">BOD</div>
+            <div class="attribute_name agility">AGI</div>
+            <div class="attribute_name reaction">REA</div>
+            <div class="attribute_name strength">STR</div>
+            <div class="attribute_name will">WIL</div>
+            <div class="attribute_name logic">LOG</div>
+            <div class="attribute_name intuition">INT</div>
+            <div class="attribute_name charisma">CHA</div>
+            <div class="attribute_name magic">MAG</div>
+            <div class="attribute_name resonance">RES</div>
+            <div class="attribute_name initiate">INIT</div>
+        </div>
+        <div class="critter_notes">
+            <label>Notes</label>
+            <textarea id="critter_notes"></textarea>
+        </div>
+        <div class="attribute_values">
+            <div class="attribute_value body"></div>
+            <div class="attribute_value agility"></div>
+            <div class="attribute_value reaction"></div>
+            <div class="attribute_value strength"></div>
+            <div class="attribute_value will"></div>
+            <div class="attribute_value logic"></div>
+            <div class="attribute_value intuition"></div>
+            <div class="attribute_value charisma"></div>
+            <div class="attribute_value magic"></div>
+            <div class="attribute_value resonance"></div>
+            <div class="attribute_value initiate"></div>
+        </div>
+        <div class="other_information">
+            <div class="condition_monitor">
+                <label>Condition Monitor</label>
+                <div>
+                    <input type="radio" name="condition_monitor" id="combined">
+                    <label for="combined">Combined</label>
+                    <input type="radio" name="condition_monitor" id="separate">
+                    <label for="separate">Separate</label>
+                </div>
+            </div>
+            <div class="wound_penalty">
+                <label>Wound Penalties</label>
+                <div>
+                    <input type="radio" name="wound_penalty" id="3">
+                    <label for="3">-1 per 3 boxes</label>
+                    <input type="radio" name="wound_penalty" id="2">
+                    <label for="2">-1 per 2 boxes</label>
+                    <input type="radio" name="wound_penalty" id="1">
+                    <label for="1">-1 per box</label>
+                    <input type="radio" name="wound_penalty" id="0">
+                    <label for="0">No penalties</label>
+                </div>
+            </div>
+            <div class="qualities">
+                <label class="positive quality">Positive Qualities</label>
+                <div class="positive quality"></div>
+                <label class="negative quality">Negative Qualities</label>
+                <div class="negative quality"></div>
+            </div>
+            <div class="skills">
+                <label>Skills</label>
+                <div class="value"></div>
+            </div>
+            <div class="augments">
+                <label>Augmentations</label>
+                <div class="value"></div>
+            </div>
+            <div class="armor">
+                <label>Armor</label>
+                <div class="value">
+                    <select name="armor"></select>
+                </div>
+            </div>
+
+            <div class="weapons">
+                <label>Weapons</label>
+                <div class="value"></div>
+            </div>
+        </div>
+    </div>
 
 	<div template="condition_monitor_combined">
 		<div class="condition_monitor_combined">

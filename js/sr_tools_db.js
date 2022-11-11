@@ -1827,7 +1827,6 @@ var db = {
 		return res;
 	},
 
-	//TODO: Create a critter version
 	get_metatype_adjustment: function(race)
 	{
 		var res = {
@@ -2453,12 +2452,234 @@ var db = {
 				break;
 
 			default:
-				console.log('ERROR: get_metatype_adjustment() with no known metatype (' + race + ')');
-				res = false;
-				break;
+				return this.get_critter_adjustment;
 		}
 
 		return res;
+	},
+
+	get_critter_adjustment: function(race)
+	{
+		var res = {
+			attributes: {body: 0, agility: 0, reaction: 0, strength: 0, will: 0, logic: 0, intuition: 0, charisma: 0, edge: 0, essence: 0, magic: 0, resonance: 0},
+			augmentations: []
+		};
+
+		//TODO: Complete critter stats
+		var races = new Map();
+		// -Unawakened Animal
+		races.set('Alligator', [8, 5, 4, 9, 1, 1, 2, 2, 3, 6, 0, 0]);
+		races.set('Barracuda', [2, 2, 3, 2, 2, 0, 2, 1, 3, 6, 0, 0]);
+		races.set('Bat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bear', [9, 4, 5, 8, 4, 1, 2, 3, 3, 6, 0, 0]);
+		races.set('Boar', [6, 2, 4, 5, 2, 1, 2, 2, 2, 6, 0, 0]);
+		races.set('Cat', [2, 4, 3, 1, 2, 2, 2, 3, 3, 6, 0, 0]);
+		races.set('Wild Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Cobra', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Deer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Large Dog', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Small Dog', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Elephant', [12, 4, 4, 16, 2, 2, 3, 3, 2, 6, 0, 0]);
+		races.set('Fox', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Goat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Green Mamba', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Horse', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Leopard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Python', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Rat', [1, 3, 2, 0, 1, 1, 1, 1, 3, 6, 0, 0]);
+		races.set('Rhinoceros', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Seal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Large Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Tiger', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Wolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Reptiles
+		races.set('Afanc', [10, 4, 4, 8, 4, 2, 4, 2, 2, 6, 4, 0]);
+		races.set('Aitvaras', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Ammit', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Basilisk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Rock Lizard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Ekyelebenle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Gila Demon', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Gomatia', [6, 3, 1, 6, 3, 2, 6, 1, 2, 6, 3, 0]);
+		races.set('Dog Asp', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Lambton Lizard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Mimic Snake', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Sea Serpent (Saltwater)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Sea Serpent (Freshwater)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Deathrattle', [3, 6, 8, 4, 2, 1, 5, 2, 2, 6, 4, 0]);
+		races.set('Ahi', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Dracoforms
+		races.set('Chimera', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Drake (Ice)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Drake (Fire)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Gorgone', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Wyvern', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Amphibians
+		races.set('Hellbender', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Nimues Salamander', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Stone Toad', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Fishes
+		races.set('Megalodon', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Spitting Pike', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Devil Jack Diamond', [5, 4, 5, 5, 2, 1, 3, 2, 2, 6, 4, 0]);
+		races.set('Torpedo Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Mammals
+		races.set('Aardwolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Agropelter', [2, 3, 4, 2, 2, 4, 4, 1, 4, 6, 0, 0]);
+		races.set('Talis Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Anwuma Bavole', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Asonwu', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bahari', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bandit', [2, 4, 3, 2, 3, 3, 5, 3, 2, 6, 0, 0]);
+		races.set('Crested Barbarian', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Barghest', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Behemoth', [14, 4, 3, 18, 5, 2, 2, 1, 1, 6, 0, 0]);
+		races.set('Greater Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Blackberry Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Blink Sloth', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Blood Monkey', [3, 5, 3, 4, 4, 2, 2, 3, 2, 6, 5, 0]);
+		races.set('Bombardier', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Borax Burro', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bulldog Stoat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Quicksilver Mongoose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Demon Rat', [5, 5, 5, 4, 4, 4, 5, 5, 3, 6, 6, 0]);
+		races.set('Unicorn', [7, 5, 5, 9, 4, 2, 4, 6, 2, 6, 5, 0]);
+		races.set('Electric Marten', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Enwontzane', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Drop Bear', [3, 3, 3, 5, 5, 2, 4, 1, 2, 6, 3, 0]);
+		races.set('Fenrir Wolf', [7, 5, 4, 8, 5, 2, 5, 2, 2, 6, 5, 0]);
+		races.set('Flame Jackal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Gabriel Hound', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Golden Boar', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Burrowing Beaver', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Greater Armadillo', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Grandfather Elk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Harpy', [4, 5, 4, 4, 2, 2, 3, 1, 1, 6, 4, 0]);
+		races.set('Humped Horse', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Hell Hound', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Hellcow', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Horned Bear', [13, 4, 4, 13, 5, 4, 4, 1, 2, 6, 5, 0]);
+		races.set('Century Ferret', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Cactus Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Meistersinger', [20, 5, 4, 30, 8, 3, 4, 5, 3, 6, 6, 0]);
+		races.set('Juggernaut', [20, 6, 5, 42, 9, 1, 3, 1, 4, 6, 6, 0]);
+		races.set('Munchkin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Embracer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Pegasus', [8, 5, 6, 7, 3, 2, 4, 2, 2, 6, 4, 0]);
+		races.set('Peryton', [8, 5, 5, 7, 4, 2, 4, 2, 1, 6, 4, 0]);
+		races.set('Piasma', [12, 5, 5, 12, 4, 2, 4, 1, 2, 6, 0, 0]);
+		races.set('Greater Wolverine', [7, 6, 5, 5, 4, 2, 4, 1, 1, 6, 0, 0]);
+		races.set('Red Deer Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Saber-Tooth Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shaman Lion', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shadowhound', [4, 4, 4, 5, 3, 2, 4, 1, 1, 6, 4, 0]);
+		races.set('Snow Moose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Black Annis', [8, 4, 5, 9, 3, 2, 3, 2, 2, 6, 4, 0]);
+		races.set('Bogie', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Sea Wolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shasta Deer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Storm Dolphin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Tasmanian Tiger', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Devil Rat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Water Buffalo Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Wild Minotaur', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Wolly Mammoth', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Cerberus Hound', [6, 4, 5, 6, 4, 2, 6, 3, 2, 6, 5, 0]);
+		races.set('Goat Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Ghoul', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Angel Squirrel', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bastet', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Birds
+		races.set('Eyekiller', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Blood Kite', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Oracle Owl', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Thunderbird', [4, 3, 7, 8, 3, 2, 4, 1, 1, 6, 6, 0]);
+		races.set('Scintillant Albatross', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Emperor Eagle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Lesser Thunderbird', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Merlin Hawk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Phoenix', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Lesser Roc', [4, 5, 4, 4, 2, 2, 4, 1, 1, 6, 3, 0]);
+		races.set('Siberian Firebird', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Strix', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Stormcrow', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Stymphalian', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Cockatrice', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Deathspiral Butterfly', [1, 4, 5, 1, 4, 2, 4, 6, 2, 6, 6, 0]);
+
+		// -Insects
+		races.set('Alufye', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Ghede Fly', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Jauchekäfer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Leerenwespe', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Siberian Bee', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Wyrd Mantis', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Amphora Mite', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Arachnids
+		races.set('Spider Beast', [2, 4, 4, 2, 3, 1, 3, 1, 1, 6, 6, 0]);
+		races.set('Nova Scorpion', [4, 4, 4, 3, 3, 2, 5, 1, 2, 6, 3, 0]);
+		races.set('Scorpyrine', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		// -Other
+		races.set('Abrams Lobster', [4, 3, 2, 7, 3, 4, 3, 1, 2, 6, 0, 0]);
+		races.set('Chupacabra', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Each-Uisge', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Fideal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Incubus', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Kraken', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Siren', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Rockworm', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Gargoyle', [10, 4, 5, 10, 4, 2, 4, 1, 1, 6, 5, 0]);
+		races.set('European Gargoyle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Fiji Mermaid', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Kludde', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Mermaid', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Sea Leech', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Leviathan', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Bandersnatch', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Dour', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shapeshifter', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Troglodyte', [3, 3, 4, 2, 3, 2, 3, 2, 1, 6, 2, 0]);
+		races.set('Merrow', [5, 3, 5, 5, 3, 3, 3, 3, 3, 6, 3, 0]);
+		races.set('Naga', [5, 2, 4, 6, 4, 3, 4, 3, 4, 6, 4, 0]);
+		races.set('Wodewose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Protean', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Griffin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Will o Whisp', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Mantichoras', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+		races.set('Shadow Crab', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+		//TODO: Add augmentation if required
+		if(races.has(race))
+		{
+			var stats = races.get(race);
+			res.attributes.body = stats[0];
+			res.attributes.agility = stats[1];
+			res.attributes.reaction = stats[2];
+			res.attributes.strength = stats[3];
+			res.attributes.will = stats[4];
+			res.attributes.logic = stats[5];
+			res.attributes.intuition = stats[6];
+			res.attributes.charisma = stats[7];
+			res.attributes.edge = stats[8];
+			res.attributes.essence = stats[9];
+			res.attributes.magic = stats[10];
+			res.attributes.resonance = stats[11];
+
+			return res;
+		}
+		else
+		{
+			return new Error("Unknown species").stack;
+		}
 	},
 
 	get_armor_list: function()

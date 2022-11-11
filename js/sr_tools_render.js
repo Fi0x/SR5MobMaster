@@ -899,7 +899,7 @@ var render = {
 		$critter.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
 
 		var attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];
-		var metatype_attributes = db.get_metatype_adjustment(data.race);
+		var metatype_attributes = db.get_critter_adjustment(data.race);
 
 		attributes.forEach(function(attribute)
 		{
@@ -935,8 +935,8 @@ var render = {
 				resonance: 0
 			};
 			var attributes = Object.keys(differences);
-			var original_attributes = db.get_metatype_adjustment(data.race);
-			var updated_attributes = db.get_metatype_adjustment($critter.find('select[name="race"]').val());
+			var original_attributes = db.get_critter_adjustment(data.race);
+			var updated_attributes = db.get_critter_adjustment($critter.find('select[name="race"]').val());
 
 			attributes.forEach(function(attr)
 			{

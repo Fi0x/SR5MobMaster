@@ -19,8 +19,7 @@ var gen = {
 		{
 			var racial = false;
 
-			//TODO: Use seperate version for critters
-			if (base.hasOwnProperty('race') || base.hasOwnProperty('critter_race'))
+			if (base.hasOwnProperty('race'))
 				racial = db.get_metatype_adjustment(base.race);
 
 			attributes.forEach(function(att)
@@ -29,7 +28,7 @@ var gen = {
 				{
 					base.attributes[att] += adjust.attributes[att];
 
-					if (racial)
+					if (racial && base.hasOwnProperty('min_attributes') && base.hasOwnProperty('max_attributes'))
 					{
 						// Racial Minimum
 						base.attributes[att] = Math.max(racial.min_attributes[att], base.attributes[att]);
@@ -528,7 +527,7 @@ var gen = {
 
 		critter.race = options.race;
 		// Get the attribute adjustments from race and apply them
-		var racial_baseline = db.get_metatype_adjustment(options.race);
+		var racial_baseline = db.get_critter_adjustment(options.race);
 
 		this._merge_adjustments(critter, racial_baseline);
 

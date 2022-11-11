@@ -905,16 +905,16 @@ var render = {
 		{
 			var $select = $('<select name="attribute_' + attribute + '"/>').appendTo($critter.find('.attribute_values .attribute_value.' + attribute));
 
-			for (var i = metatype_attributes.min_attributes[attribute]; i <= metatype_attributes.max_attributes[attribute]; i++)
+			for (var i = 0; i <= 99; i++)
 			{
 				$select.append($('<option/>').html(i).attr('value', i))
 			}
 
-			if (data.attributes[attribute] < metatype_attributes.min_attributes[attribute])
-				data.attributes[attribute] = metatype_attributes.min_attributes[attribute];
+			if (data.attributes[attribute] < 0)
+				data.attributes[attribute] = 0;
 
-			if (data.attributes[attribute] > metatype_attributes.max_attributes[attribute])
-				data.attributes[attribute] = metatype_attributes.max_attributes[attribute];
+			if (data.attributes[attribute] > 99)
+				data.attributes[attribute] = 99;
 
 			$critter.find('.attribute_values select[name="attribute_' + attribute + '"] option[value="' + data.attributes[attribute] + '"]').prop('selected', true);
 		});
@@ -935,14 +935,13 @@ var render = {
 				resonance: 0
 			};
 			var attributes = Object.keys(differences);
-			var original_attributes = db.get_critter_adjustment(data.race);
 			var updated_attributes = db.get_critter_adjustment($critter.find('select[name="race"]').val());
 
 			attributes.forEach(function(attr)
 			{
-				differences[attr] = parseInt($critter.find('select[name="attribute_' + attr + '"]').val()) - original_attributes.min_attributes[attr];
+				differences[attr] = parseInt($critter.find('select[name="attribute_' + attr + '"]').val());
 
-				var cap = updated_attributes.max_attributes[attr] - updated_attributes.min_attributes[attr];
+				var cap = 99;
 				if (differences[attr] > cap)
 					differences[attr] = cap;
 
@@ -950,12 +949,12 @@ var render = {
 
 				var $select = $('<select name="attribute_' + attr + '"/>').appendTo($critter.find('.attribute_values .attribute_value.' + attr));
 
-				for (var i = updated_attributes.min_attributes[attr]; i <= updated_attributes.max_attributes[attr]; i++)
+				for (var i = 0; i <= 99; i++)
 				{
 					$select.append($('<option/>').html(i).attr('value', i))
 				}
 
-				$critter.find('.attribute_values select[name="attribute_' + attr + '"] option[value="' +(updated_attributes.min_attributes[attr] + differences[attr]) + '"]').prop('selected', true);
+				$critter.find('.attribute_values select[name="attribute_' + attr + '"] option[value="' +(0 + differences[attr]) + '"]').prop('selected', true);
 			});
 		};
 
@@ -1255,32 +1254,35 @@ var render = {
 			var $weapons = $critter.find('.other_information .weapons .value');
 
 			$weapons.empty();
-			data.weapons.forEach(function(weapon)
+			if(data.weapons)
 			{
-				var $weapon = render.get_template('edit_weapon').appendTo($weapons);
-				$weapon.find('button').button();
+				data.weapons.forEach(function(weapon)
+				{
+					var $weapon = render.get_template('edit_weapon').appendTo($weapons);
+					$weapon.find('button').button();
 
-				if (typeof weapon === 'string')
-				{
-					$weapon.find('.weapon').html(weapon);
-					$weapon.find('button').prop('weapon_name', weapon);
-				}
-				else if (weapon.weapon_focus === true)
-				{
-					$weapon.find('.weapon').html(weapon.name + ' (Weapon Focus)');
-					$weapon.find('button').prop('weapon_name', weapon.name);
-				}
-				else if (weapon.magic_focus === true)
-				{
-					$weapon.find('.weapon').html(weapon.base_name + ' ' + weapon.name);
-					$weapon.find('button').prop('weapon_name', weapon.name);
-				}
-				else
-				{
-					$weapon.find('.weapon').html(weapon.name);
-					$weapon.find('button').prop('weapon_name', weapon.name);
-				}
-			});
+					if (typeof weapon === 'string')
+					{
+						$weapon.find('.weapon').html(weapon);
+						$weapon.find('button').prop('weapon_name', weapon);
+					}
+					else if (weapon.weapon_focus === true)
+					{
+						$weapon.find('.weapon').html(weapon.name + ' (Weapon Focus)');
+						$weapon.find('button').prop('weapon_name', weapon.name);
+					}
+					else if (weapon.magic_focus === true)
+					{
+						$weapon.find('.weapon').html(weapon.base_name + ' ' + weapon.name);
+						$weapon.find('button').prop('weapon_name', weapon.name);
+					}
+					else
+					{
+						$weapon.find('.weapon').html(weapon.name);
+						$weapon.find('button').prop('weapon_name', weapon.name);
+					}
+				});
+			}
 
 			$new_weapon = $('<div/>').appendTo($weapons);
 			$select = $('<select name="weapon_name"/>').appendTo($new_weapon);
@@ -2394,11 +2396,6 @@ var render = {
 
 		// Skills
 		var improved_skills = [], improved_rating = 0, $skill, skill, skill_data, skill_limit, power_focus;
-
-		power_focus = data.gear.find(function (gear)
-		{
-			return gear.name === 'Power focus';
-		});
 
 		// TODO This only really accounts for 1 improved ability, but that's all that is generated right now
 		if (data.special.is_adept === true)

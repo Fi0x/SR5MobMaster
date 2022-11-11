@@ -3516,16 +3516,7 @@ var render = {
 		{
 			$critter.find('.critter_name').html(data.name);
 
-			var description = data.gender + ' ' + data.race + ', Rating ' + data.professional_rating + ' ' + data.professional_description;
-
-			if (data.special.is_lt)
-				description += ' Lieutenant';
-			if (data.special.is_decker)
-				description += ' Decker';
-			if (data.special.is_adept)
-				description += ' Physical Adept';
-			if (data.special.is_mage)
-				description += ' Magician';
+			var description = data.race;
 
 			$critter.find('.critter_description').html(description);
 		}
@@ -3974,7 +3965,7 @@ var render = {
 
 		$critter.find('.controls button.action').click(function()
 		{
-			render.mook_for_action($target, data, options);
+			render.critter_for_action($target, data, options);
 		});
 
 		$critter.find('.controls button.edit').click(function()

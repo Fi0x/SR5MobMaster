@@ -223,7 +223,20 @@ var render = {
 		$mook.find('select[name="gender"] option[value="' + data.gender + '"]').prop('selected', true);
 
 		// Race
-		$mook.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
+        var $race_select = $mook.find('select[name="race"]');
+
+        $race_select.empty();
+        var all_races = db.get_metatype_list();
+        all_races.forEach(function(cat)
+        {
+            $race_select.append($('<optgroup label="' + cat.category + '"/>'));
+            cat.entries.forEach(function (ent)
+            {
+                $race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+            });
+        });
+
+        $race_select.prop('selected', true);
 
 		var attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];
 		var metatype_attributes = db.get_metatype_adjustment(data.race);

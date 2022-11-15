@@ -3,12 +3,12 @@ var db = {
 	gen_race: function()
 	{
 		var races = new Map();
-		races.set(0.66, 'Human');
-		races.set(0.16, 'Ork');
-		races.set(0.13, 'Elf');
-		races.set(0.02, 'Dwarf');
-		races.set(0.02, 'Troll');
-		races.set(0.01, 'other');
+		races.set(0.50, 'Human');
+		races.set(0.17, 'Ork');
+		races.set(0.14, 'Elf');
+		races.set(0.08, 'Dwarf');
+		races.set(0.07, 'Troll');
+		races.set(0.04, 'other');
 
 		var r = Math.random(), res, a = 0;
 
@@ -1356,6 +1356,9 @@ var db = {
 						res.weapons.push(this.get_weapon('HK-227'));
 					}
 					break;
+
+				default:
+					console.error("Unknown metatype in get_special_adjustments() for weapon selection");
 			}
 		}
 
@@ -1413,6 +1416,9 @@ var db = {
 					res.skills.Intimidation = rating + 3;
 					res.skills['Heavy Weapons'] = rating + 3;
 					break;
+
+				default:
+					console.error("Unknown metatype in get_special_adjustments() for weapon selection");
 			}
 
 			// Qualities
@@ -1651,6 +1657,9 @@ var db = {
 							break;
 					}
 					break;
+
+				default:
+					console.error("Unknown metatype in get_special_adjustments() for weapon selection");
 			}
 
 			if (rating < 4)
@@ -1827,6 +1836,238 @@ var db = {
 		return res;
 	},
 
+	_metatype_list: [
+		{
+			category: 'Default Metatypes',
+			entries: [
+				{
+					name: 'Human',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Elf',
+					stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+					augment: ['Low-Light Vision']
+				},
+				{
+					name: 'Dwarf',
+					stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 0, 0],
+					augment: ['Thermographic Vision', 'Pathogen Resistance (2)', 'Toxin Resistance (2)', 'Increased Lifestyle Costs (120%)']
+				},
+				{
+					name: 'Ork',
+					stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 0, 0],
+					augment: ['Low-Light Vision']
+				},
+				{
+					name: 'Troll',
+					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 0, 0],
+					augment: ['Thermographic Vision', 'Extended Reach (1)', 'Troll Dermal Deposits (1)', 'Increased Lifestyle Costs (200%)']
+				}
+			]
+		},
+		{
+			category: 'Sub-Species',
+			entries: [
+				{
+					name: 'Gnome',
+					stats: [-2, 1, 0, -2, 1, 1, 0, 0, 0, 0, 0],
+					augment: ['Arcane Arrester (2)', 'Neoteny', 'Thermographic Vision']
+				},
+				{
+					name: 'Hanuman',
+					stats: [0, 1, 0, 1, 0, -1, 1, -1, 0, 0, 0],
+					augment: ['Low-Light Vision', 'Monkey Pawns', 'Prehensile Tail', 'Unusual Hair (Body)']
+				},
+				{
+					name: 'Koborokuru',
+					stats: [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+					augment: ['Celerity', 'Pathogen Resistance (1)', 'Toxin Resistance (1)', 'Thermographic Vision', 'Unusual Hair']
+				},
+				{
+					name: 'Menehune',
+					stats: [1, 1, -1, 1, 0, 0, 0, 0, 0, 0, 0],
+					augment: ['Pathogen Resistance (1)', 'Toxin Resistance (1)', 'Thermographic Vision', 'Underwater Vision']
+				},
+				{
+					name: 'Dryade',
+					stats: [0, 1, 0, -1, 0, 0, 0, 2, 0, 0, 0],
+					augment: ['Glamour', 'Low-Light Vision', 'Symbiosis']
+				},
+				{
+					name: 'Nocturna',
+					stats: [-1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+					augment: ['Allergy (Sunlight, Mild)', 'Low-Light Vision', 'Keen-eared', 'Nocturnal', 'Unusual Hair (Colored Fur)']
+				},
+				{
+					name: 'Wakyambi',
+					stats: [0, 1, 0, 0, 0, -1, 1, 0, 1, 0, 0],
+					augment: ['Celerity', 'Elongated Limbs', 'Low-Light Vision']
+				},
+				{
+					name: 'Xapiri Thepe',
+					stats: [0, 1, 0, 0, 0, -1, 0, 1, 0, 0, 0],
+					augment: ['Allergy (Pollutants, Mild)', 'Low-Light Vision', 'Photometabolism']
+				},
+				{
+					name: 'Nartaki',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: ['Shiva Arms', 'Striking Skin Pigmentation']
+				},
+				{
+					name: 'Hobgoblin',
+					stats: [0, 0, 0, 1, 0, -1, 0, 1, 0, 0, 0],
+					augment: ['Fangs', 'Low-Light Vision', 'Extravagant Eyes', 'Poor Self Control (Vindictive)']
+				},
+				{
+					name: 'Ogre',
+					stats: [3, 0, -1, 2, 1, -1, 0, -2, 0, 0, 0],
+					augment: ['Low-Light Vision', 'Ogre Stomach']
+				},
+				{
+					name: 'Oni',
+					stats: [2, 1, 0, 1, 0, -1, 0, 1, 0, 0, 0],
+					augment: ['Low-Light Vision', 'Striking Skin Pigmentation']
+				},
+				{
+					name: 'Satyr',
+					stats: [1, 0, 1, 1, 0, 0, 0, -1, 0, 0, 0],
+					augment: ['Low-Light Vision', 'Satyr Legs']
+				},
+				{
+					name: 'Cyclops',
+					stats: [4, -1, 0, 5, 0, -2, -1, -2, 0, 0, 0],
+					augment: ['Cyclopean Eye', 'Extended Reach (1)']
+				},
+				{
+					name: 'Fomorian',
+					stats: [3, -1, 0, 4, -1, -2, -2, -1, 0, 0, 0],
+					augment: ['Arcane Arrester (1)', 'Thermographic Vision', 'Extended Reach (1)']
+				},
+				{
+					name: 'Giant',
+					stats: [4, -1, -1, 4, 0, -1, -1, -1, 0, 0, 0],
+					augment: ['Dermal Alteration (Bark)', 'Thermographic Vision', 'Extended Reach (1)']
+				},
+				{
+					name: 'Minotaur',
+					stats: [5, -1, 0, 4, 0, -1, 0, -2, 0, 0, 0],
+					augment: ['Goring Horns', 'Thermographic Vision', 'Extended Reach (1)']
+				},
+			]
+		},
+		{
+			category: 'Infected Ones',
+			entries: [
+				//TODO: Adjust the infected races
+				{
+					name: 'Vampire',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Nosferatu',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0],
+					augment: ['Dual Natured', 'Low-Light Vision', 'Enhanced Hearing', 'Thermographic Vision', 'Age Immunity', 'Pathogen Immunity', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Allergy (Sunlight, Extreme)', 'Allergy (Wood, Severe)']
+				},
+				{
+					name: 'Banshee',
+					stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 6, 0],
+					augment: ['Dual Natured', 'Low-Light Vision', 'Enhanced Hearing', 'Enhanced Smell', 'Age Immunity', 'Pathogen Immunity', 'Toxin Immunity', 'Mist Form', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Allergy (Sunlight, Severe)']
+				},
+				{
+					name: 'Harvester',
+					stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 6, 0],
+					augment: ['Armor (2)', 'Dual Natured', 'Low-Light Vision', 'Thermographic Vision', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+3)P, AP -3, Reach 0)', 'Allergy (Silver, Moderate)', 'Allergy (Sunlight, Moderate)']
+				},
+				{
+					name: 'Goblin',
+					stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 6, 0],
+					augment: ['Dual Natured', 'Enhanced Smell', 'Enhanced Taste', 'Thermographic Vision', 'Age Immunity', 'Fire Immunity', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Sunlight, Moderate)']
+				},
+				{
+					name: 'Gnawer',
+					stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 6, 0],
+					augment: ['Armor (2)', 'Dual Natured', 'Thermographic Vision', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+2)P, AP 0, Reach -1)', 'Allergy (Sunlight, Moderate)']
+				},
+				{
+					name: 'Wendigo',
+					stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Grendel',
+					stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Fomoraig',
+					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Mutaqua',
+					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Bandersnatch',
+					stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Dzoo-Noo-Qua',
+					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
+					augment: []
+				},
+			]
+		},
+		{
+			category: 'Special Races',
+			entries: [
+				{
+					name: 'Centaur',
+					stats: [2, 0, 0, 2, 0, 0, -1, -1, -1, 1, 0],
+					augment: ['Low-Light Vision', 'Thermographic Vision', 'Magic Sense', 'Natural Weapon (Kick: DV(STR+2)P, AP +1, Reach +1)', 'Search', 'Movement (x1/x4/+4)']
+				},
+				{
+					name: 'Naga',
+					stats: [2, -2, 1, 3, 1, 0, 0, 1, -1, 1, 0],
+					augment: ['Armor (8)', 'Cold-Blooded', 'Dual Natured', 'Guard', 'Natural Weapon (Bite: DV(STR+1)P, AP -2, Reach -1)', 'Venom']
+				},
+				{
+					name: 'Pixie',
+					stats: [-4, 2, 2, -4, 2, 1, 1, 2, 1, 1, 0],
+					augment: ['Astral Perception', 'Concealment (Self Only)', 'Vanishing', 'Uneducated', 'Movement (x1/x2/+1; x2/x6/+2 flight)']
+				},
+				{
+					name: 'Sasquatch',
+					stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0],
+					augment: ['Dual Natured', 'Mimicry', 'Natural Weapon (Claws: DV(STR+1)P, AP -, Reach +1)', 'Uneducated']
+				}
+			]
+		}
+	],
+
+	//TODO: Use this like get_augmentation_list for render to auto-generate a full list
+	get_metatype_list: function()
+	{
+		return this._metatype_list;
+	},
+
+	get_metatype: function(name)
+	{
+		for (var i = 0; i < this._metatype_list.length; i++)
+		{
+			for (var j = 0; j < this._metatype_list[i].entries.length; j++)
+			{
+				if(this._metatype_list[i].entries[j].name === name)
+					return this._metatype_list[i].entries[j];
+			}
+		}
+	},
+
 	get_metatype_adjustment: function(race)
 	{
 		var res = {
@@ -1836,52 +2077,10 @@ var db = {
 			augmentations: []
 		};
 
-		var races = new Map();
-		races.set('Human', {stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], augment: []});
-		races.set('Elf', {stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0], augment: ['Low-Light Vision']});
-		races.set('Dwarf', {stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 0, 0], augment: ['Thermographic Vision', 'Pathogen Resistance (2)', 'Toxin Resistance (2)', 'Increased Lifestyle Costs (120%)']});
-		races.set('Ork', {stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 0, 0], augment: ['Low-Light Vision']});
-		races.set('Troll', {stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 0, 0], augment: ['Thermographic Vision', 'Extended Reach (1)', 'Troll Dermal Deposits (1)', 'Increased Lifestyle Costs (200%)']});
-
-		races.set('Gnome', {stats: [-2, 1, 0, -2, 1, 1, 0, 0, 0, 0, 0], augment: ['Arcane Arrester (2)', 'Neoteny', 'Thermographic Vision']});
-		races.set('Hanuman', {stats: [0, 1, 0, 1, 0, -1, 1, -1, 0, 0, 0], augment: ['Low-Light Vision', 'Monkey Pawns', 'Prehensile Tail', 'Unusual Hair (Body)']});
-		races.set('Koborokuru', {stats: [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0], augment: ['Celerity', 'Pathogen Resistance (1)', 'Toxin Resistance (1)', 'Thermographic Vision', 'Unusual Hair']});
-		races.set('Menehune', {stats: [1, 1, -1, 1, 0, 0, 0, 0, 0, 0, 0], augment: ['Pathogen Resistance (1)', 'Toxin Resistance (1)', 'Thermographic Vision', 'Underwater Vision']});
-		races.set('Dryade', {stats: [0, 1, 0, -1, 0, 0, 0, 2, 0, 0, 0], augment: ['Glamour', 'Low-Light Vision', 'Symbiosis']});
-		races.set('Nocturna', {stats: [-1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0], augment: ['Allergy (Sunlight, Mild)', 'Low-Light Vision', 'Keen-eared', 'Nocturnal', 'Unusual Hair (Colored Fur)']});
-		races.set('Wakyambi', {stats: [0, 1, 0, 0, 0, -1, 1, 0, 1, 0, 0], augment: ['Celerity', 'Elongated Limbs', 'Low-Light Vision']});
-		races.set('Xapiri Thepe', {stats: [0, 1, 0, 0, 0, -1, 0, 1, 0, 0, 0], augment: ['Allergy (Pollutants, Mild)', 'Low-Light Vision', 'Photometabolism']});
-		races.set('Nartaki', {stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], augment: ['Shiva Arms', 'Striking Skin Pigmentation']});
-		races.set('Hobgoblin', {stats: [0, 0, 0, 1, 0, -1, 0, 1, 0, 0, 0], augment: ['Fangs', 'Low-Light Vision', 'Extravagant Eyes', 'Poor Self Control (Vindictive)']});
-		races.set('Ogre', {stats: [3, 0, -1, 2, 1, -1, 0, -2, 0, 0, 0], augment: ['Low-Light Vision', 'Ogre Stomach']});
-		races.set('Oni', {stats: [2, 1, 0, 1, 0, -1, 0, 1, 0, 0, 0], augment: ['Low-Light Vision', 'Striking Skin Pigmentation']});
-		races.set('Satyr', {stats: [1, 0, 1, 1, 0, 0, 0, -1, 0, 0, 0], augment: ['Low-Light Vision', 'Satyr Legs']});
-		races.set('Cyclops', {stats: [4, -1, 0, 5, 0, -2, -1, -2, 0, 0, 0], augment: ['Cyclopean Eye', 'Extended Reach (1)']});
-		races.set('Fomorian', {stats: [3, -1, 0, 4, -1, -2, -2, -1, 0, 0, 0], augment: ['Arcane Arrester (1)', 'Thermographic Vision', 'Extended Reach (1)']});
-		races.set('Giant', {stats: [4, -1, -1, 4, 0, -1, -1, -1, 0, 0, 0], augment: ['Dermal Alteration (Bark)', 'Thermographic Vision', 'Extended Reach (1)']});
-		races.set('Minotaur', {stats: [5, -1, 0, 4, 0, -1, 0, -2, 0, 0, 0], augment: ['Goring Horns', 'Thermographic Vision', 'Extended Reach (1)']});
-		//TODO: Adjust the infected races
-		races.set('Vampire', {stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0], augment: []});
-		races.set('Nosferatu', {stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0], augment: []});
-		races.set('Banshee', {stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 6, 0], augment: []});
-		races.set('Harvester', {stats: [0, 1, 0, 0, 0, 0, 0, 2, 0, 6, 0], augment: []});
-		races.set('Goblin', {stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 6, 0], augment: []});
-		races.set('Gnawer', {stats: [2, 0, -1, 2, 1, 0, 0, 0, 0, 6, 0], augment: []});
-		races.set('Wendigo', {stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0], augment: []});
-		races.set('Grendel', {stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0], augment: []});
-		races.set('Fomoraig', {stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0], augment: []});
-		races.set('Mutaqua', {stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0], augment: []});
-		races.set('Bandersnatch', {stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 6, 0], augment: []});
-		races.set('Dzoo-Noo-Qua', {stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0], augment: []});
-
-		races.set('Centaur', {stats: [2, 0, 0, 2, 0, 0, -1, -1, -1, 1, 0], augment: ['Low-Light Vision', 'Thermographic Vision', 'Magic Sense', 'Natural Weapon (Kick: DV(STR+2)P, AP +1, Reach +1)', 'Search', 'Movement (x1/x4/+4)']});
-		races.set('Naga', {stats: [2, -2, 1, 3, 1, 0, 0, 1, -1, 1, 0], augment: ['Armor (8)', 'Cold-Blooded', 'Dual Natured', 'Guard', 'Natural Weapon (Bite: DV(STR+1)P, AP -2, Reach -1)', 'Venom']});
-		races.set('Pixie', {stats: [-4, 2, 2, -4, 2, 1, 1, 2, 1, 1, 0], augment: ['Astral Perception', 'Concealment (Self Only)', 'Vanishing', 'Uneducated', 'Movement (x1/x2/+1; x2/x6/+2 flight)']});
-		races.set('Sasquatch', {stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0], augment: ['Dual Natured', 'Mimicry', 'Natural Weapon (Claws: DV(STR+1)P, AP -, Reach +1)', 'Uneducated']});
-
-		if(races.has(race))
+		var metatype_entry = this.get_metatype(race);
+		if(metatype_entry)
 		{
-			var stats = races.get(race).stats;
+			var stats = metatype_entry.stats;
 
 			res.attributes.body += stats[0] > 0 ? stats[0] : 0;
 			res.attributes.agility += stats[1] > 0 ? stats[1] : 0;
@@ -1922,15 +2121,938 @@ var db = {
 			res.max_attributes.magic += stats[10];
 			res.max_attributes.resonance += stats[11];
 
-			for(var augment in races.get(race).augment)
+			for(var aug in metatype_entry.augment)
 			{
-				res.augmentations.push({name: '' + augment});
+				res.augmentations.push({name: metatype_entry.augment[aug]});
 			}
+
 			return res;
 		}
 		else
 		{
 			return this.get_critter_adjustment(race);
+		}
+	},
+
+	_critter_list: [
+		//TODO: Complete critter stats
+		{
+			category: 'Unawakened Animal',
+			entries: [
+				{
+					name: 'Alligator',
+					stats: [8, 5, 4, 9, 1, 1, 2, 2, 3, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Barracuda',
+					stats: [2, 2, 3, 2, 2, 0, 2, 1, 3, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bear',
+					stats: [9, 4, 5, 8, 4, 1, 2, 3, 3, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Boar',
+					stats: [6, 2, 4, 5, 2, 1, 2, 2, 2, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Cat',
+					stats: [2, 4, 3, 1, 2, 2, 2, 3, 3, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wild Cat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Cobra',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Deer',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Large Dog',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Small Dog',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Elephant',
+					stats: [12, 4, 4, 16, 2, 2, 3, 3, 2, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Fox',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Goat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Green Mamba',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Horse',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Leopard',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Python',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Rat',
+					stats: [1, 3, 2, 0, 1, 1, 1, 1, 3, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Rhinoceros',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Seal',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shark',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Large Shark',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Tiger',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wolf',
+					stats: [6, 3, 5, 5, 3, 2, 4, 3, 3, 6, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Reptiles',
+			entries: [
+				{
+					name: 'Afanc',
+					stats: [10, 4, 4, 8, 4, 2, 4, 2, 2, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Aitvaras',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Ammit',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Basilisk',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Rock Lizard',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Ekyelebenle',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Gila Demon',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Gomatia',
+					stats: [6, 3, 1, 6, 3, 2, 6, 1, 2, 6, 3, 0],
+					augment: []
+				},
+				{
+					name: 'Dog Asp',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Lambton Lizard',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Mimic Snake',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Sea Serpent (Saltwater)',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Sea Serpent (Freshwater)',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Deathrattle',
+					stats: [3, 6, 8, 4, 2, 1, 5, 2, 2, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Ahi',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Dracoforms',
+			entries: [
+				{
+					name: 'Chimera',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Drake (Ice)',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Drake (Fire)',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Gorgone',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wyvern',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Amphibians',
+			entries: [
+				{
+					name: 'Hellbender',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Nimues Salamander',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Stone Toad',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Fishes',
+			entries: [
+				{
+					name: 'Megalodon',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Spitting Pike',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Devil Jack Diamond',
+					stats: [5, 4, 5, 5, 2, 1, 3, 2, 2, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Torpedo Shark',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Mammals',
+			entries: [
+				{
+					name: 'Aardwolf',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Agropelter',
+					stats: [2, 3, 4, 2, 2, 4, 4, 1, 4, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Talis Cat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Anwuma Bavole',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Asonwu',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bahari',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bandit',
+					stats: [2, 4, 3, 2, 3, 3, 5, 3, 2, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Crested Barbarian',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Barghest',
+					stats: [8, 5, 6, 6, 4, 2, 5, 5, 4, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Behemoth',
+					stats: [14, 4, 3, 18, 5, 2, 2, 1, 1, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Greater Unicorn',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Blackberry Cat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Blink Sloth',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Blood Monkey',
+					stats: [3, 5, 3, 4, 4, 2, 2, 3, 2, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Bombardier',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Borax Burro',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bulldog Stoat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Quicksilver Mongoose',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Demon Rat',
+					stats: [5, 5, 5, 4, 4, 4, 5, 5, 3, 6, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Unicorn',
+					stats: [7, 5, 5, 9, 4, 2, 4, 6, 2, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Electric Marten',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Enwontzane',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Drop Bear',
+					stats: [3, 3, 3, 5, 5, 2, 4, 1, 2, 6, 3, 0],
+					augment: []
+				},
+				{
+					name: 'Fenrir Wolf',
+					stats: [7, 5, 4, 8, 5, 2, 5, 2, 2, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Flame Jackal',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Gabriel Hound',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Golden Boar',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Burrowing Beaver',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Greater Armadillo',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Grandfather Elk',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Harpy',
+					stats: [4, 5, 4, 4, 2, 2, 3, 1, 1, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Humped Horse',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Hell Hound',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Hellcow',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Horned Bear',
+					stats: [13, 4, 4, 13, 5, 4, 4, 1, 2, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Century Ferret',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Cactus Cat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Meistersinger',
+					stats: [20, 5, 4, 30, 8, 3, 4, 5, 3, 6, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Juggernaut',
+					stats: [20, 6, 5, 42, 9, 1, 3, 1, 4, 6, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Munchkin',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Embracer',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Pegasus',
+					stats: [8, 5, 6, 7, 3, 2, 4, 2, 2, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Peryton',
+					stats: [8, 5, 5, 7, 4, 2, 4, 2, 1, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Piasma',
+					stats: [12, 5, 5, 12, 4, 2, 4, 1, 2, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Greater Wolverine',
+					stats: [7, 6, 5, 5, 4, 2, 4, 1, 1, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Red Deer Unicorn',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Saber-Tooth Cat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shaman Lion',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shadowhound',
+					stats: [4, 4, 4, 5, 3, 2, 4, 1, 1, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Snow Moose',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Black Annis',
+					stats: [8, 4, 5, 9, 3, 2, 3, 2, 2, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Bogie',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Sea Wolf',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shasta Deer',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Storm Dolphin',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Tasmanian Tiger',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Devil Rat',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Water Buffalo Unicorn',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wild Minotaur',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wolly Mammoth',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Cerberus Hound',
+					stats: [6, 4, 5, 6, 4, 2, 6, 3, 2, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'Goat Unicorn',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Ghoul',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Angel Squirrel',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bastet',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Birds',
+			entries: [
+				{
+					name: 'Eyekiller',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Blood Kite',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Oracle Owl',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Thunderbird',
+					stats: [4, 3, 7, 8, 3, 2, 4, 1, 1, 6, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Scintillant Albatross',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Emperor Eagle',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Lesser Thunderbird',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Merlin Hawk',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Phoenix',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Lesser Roc',
+					stats: [4, 5, 4, 4, 2, 2, 4, 1, 1, 6, 3, 0],
+					augment: []
+				},
+				{
+					name: 'Siberian Firebird',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Strix',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Stormcrow',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Stymphalian',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Cockatrice',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Deathspiral Butterfly',
+					stats: [1, 4, 5, 1, 4, 2, 4, 6, 2, 6, 6, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Insects',
+			entries: [
+				{
+					name: 'Alufye',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Ghede Fly',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Jauchekäfer',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Leerenwespe',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Siberian Bee',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Wyrd Mantis',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Amphora Mite',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Arachnids',
+			entries: [
+				{
+					name: 'Spider Beast',
+					stats: [2, 4, 4, 2, 3, 1, 3, 1, 1, 6, 6, 0],
+					augment: []
+				},
+				{
+					name: 'Nova Scorpion',
+					stats: [4, 4, 4, 3, 3, 2, 5, 1, 2, 6, 3, 0],
+					augment: []
+				},
+				{
+					name: 'Scorpyrine',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		},
+		{
+			category: 'Other Species',
+			entries: [
+				{
+					name: 'Abrams Lobster',
+					stats: [4, 3, 2, 7, 3, 4, 3, 1, 2, 6, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Chupacabra',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Each-Uisge',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Fideal',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Incubus',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Kraken',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Siren',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Rockworm',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Gargoyle',
+					stats: [10, 4, 5, 10, 4, 2, 4, 1, 1, 6, 5, 0],
+					augment: []
+				},
+				{
+					name: 'European Gargoyle',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Fiji Mermaid',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Kludde',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Mermaid',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Sea Leech',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Leviathan',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Bandersnatch',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Dour',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shapeshifter',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Troglodyte',
+					stats: [3, 3, 4, 2, 3, 2, 3, 2, 1, 6, 2, 0],
+					augment: []
+				},
+				{
+					name: 'Merrow',
+					stats: [5, 3, 5, 5, 3, 3, 3, 3, 3, 6, 3, 0],
+					augment: []
+				},
+				{
+					name: 'Naga',
+					stats: [5, 2, 4, 6, 4, 3, 4, 3, 4, 6, 4, 0],
+					augment: []
+				},
+				{
+					name: 'Wodewose',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Protean',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Griffin',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Will o Whisp',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Mantichoras',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				},
+				{
+					name: 'Shadow Crab',
+					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					augment: []
+				}
+			]
+		}
+	],
+
+	//TODO: Use this like get_augmentation_list for render to auto-generate a full list
+	get_critter_list: function()
+	{
+		return this._critter_list;
+	},
+
+	get_critter: function(name)
+	{
+		for (var i = 0; i < this._critter_list.length; i++)
+		{
+			for (var j = 0; j < this._critter_list[i].entries.length; j++)
+			{
+				if(this._critter_list[i].entries[j].name === name)
+					return this._critter_list[i].entries[j];
+			}
 		}
 	},
 
@@ -1941,202 +3063,10 @@ var db = {
 			augmentations: []
 		};
 
-		//TODO: Complete critter stats
-		var races = new Map();
-		// -Unawakened Animal
-		races.set('Alligator', [8, 5, 4, 9, 1, 1, 2, 2, 3, 6, 0, 0]);
-		races.set('Barracuda', [2, 2, 3, 2, 2, 0, 2, 1, 3, 6, 0, 0]);
-		races.set('Bat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bear', [9, 4, 5, 8, 4, 1, 2, 3, 3, 6, 0, 0]);
-		races.set('Boar', [6, 2, 4, 5, 2, 1, 2, 2, 2, 6, 0, 0]);
-		races.set('Cat', [2, 4, 3, 1, 2, 2, 2, 3, 3, 6, 0, 0]);
-		races.set('Wild Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Cobra', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Deer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Large Dog', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Small Dog', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Elephant', [12, 4, 4, 16, 2, 2, 3, 3, 2, 6, 0, 0]);
-		races.set('Fox', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Goat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Green Mamba', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Horse', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Leopard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Python', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Rat', [1, 3, 2, 0, 1, 1, 1, 1, 3, 6, 0, 0]);
-		races.set('Rhinoceros', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Seal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Large Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Tiger', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Wolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Reptiles
-		races.set('Afanc', [10, 4, 4, 8, 4, 2, 4, 2, 2, 6, 4, 0]);
-		races.set('Aitvaras', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Ammit', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Basilisk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Rock Lizard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Ekyelebenle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Gila Demon', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Gomatia', [6, 3, 1, 6, 3, 2, 6, 1, 2, 6, 3, 0]);
-		races.set('Dog Asp', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Lambton Lizard', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Mimic Snake', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Sea Serpent (Saltwater)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Sea Serpent (Freshwater)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Deathrattle', [3, 6, 8, 4, 2, 1, 5, 2, 2, 6, 4, 0]);
-		races.set('Ahi', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Dracoforms
-		races.set('Chimera', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Drake (Ice)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Drake (Fire)', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Gorgone', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Wyvern', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Amphibians
-		races.set('Hellbender', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Nimues Salamander', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Stone Toad', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Fishes
-		races.set('Megalodon', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Spitting Pike', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Devil Jack Diamond', [5, 4, 5, 5, 2, 1, 3, 2, 2, 6, 4, 0]);
-		races.set('Torpedo Shark', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Mammals
-		races.set('Aardwolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Agropelter', [2, 3, 4, 2, 2, 4, 4, 1, 4, 6, 0, 0]);
-		races.set('Talis Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Anwuma Bavole', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Asonwu', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bahari', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bandit', [2, 4, 3, 2, 3, 3, 5, 3, 2, 6, 0, 0]);
-		races.set('Crested Barbarian', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Barghest', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Behemoth', [14, 4, 3, 18, 5, 2, 2, 1, 1, 6, 0, 0]);
-		races.set('Greater Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Blackberry Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Blink Sloth', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Blood Monkey', [3, 5, 3, 4, 4, 2, 2, 3, 2, 6, 5, 0]);
-		races.set('Bombardier', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Borax Burro', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bulldog Stoat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Quicksilver Mongoose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Demon Rat', [5, 5, 5, 4, 4, 4, 5, 5, 3, 6, 6, 0]);
-		races.set('Unicorn', [7, 5, 5, 9, 4, 2, 4, 6, 2, 6, 5, 0]);
-		races.set('Electric Marten', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Enwontzane', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Drop Bear', [3, 3, 3, 5, 5, 2, 4, 1, 2, 6, 3, 0]);
-		races.set('Fenrir Wolf', [7, 5, 4, 8, 5, 2, 5, 2, 2, 6, 5, 0]);
-		races.set('Flame Jackal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Gabriel Hound', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Golden Boar', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Burrowing Beaver', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Greater Armadillo', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Grandfather Elk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Harpy', [4, 5, 4, 4, 2, 2, 3, 1, 1, 6, 4, 0]);
-		races.set('Humped Horse', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Hell Hound', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Hellcow', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Horned Bear', [13, 4, 4, 13, 5, 4, 4, 1, 2, 6, 5, 0]);
-		races.set('Century Ferret', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Cactus Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Meistersinger', [20, 5, 4, 30, 8, 3, 4, 5, 3, 6, 6, 0]);
-		races.set('Juggernaut', [20, 6, 5, 42, 9, 1, 3, 1, 4, 6, 6, 0]);
-		races.set('Munchkin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Embracer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Pegasus', [8, 5, 6, 7, 3, 2, 4, 2, 2, 6, 4, 0]);
-		races.set('Peryton', [8, 5, 5, 7, 4, 2, 4, 2, 1, 6, 4, 0]);
-		races.set('Piasma', [12, 5, 5, 12, 4, 2, 4, 1, 2, 6, 0, 0]);
-		races.set('Greater Wolverine', [7, 6, 5, 5, 4, 2, 4, 1, 1, 6, 0, 0]);
-		races.set('Red Deer Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Saber-Tooth Cat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shaman Lion', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shadowhound', [4, 4, 4, 5, 3, 2, 4, 1, 1, 6, 4, 0]);
-		races.set('Snow Moose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Black Annis', [8, 4, 5, 9, 3, 2, 3, 2, 2, 6, 4, 0]);
-		races.set('Bogie', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Sea Wolf', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shasta Deer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Storm Dolphin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Tasmanian Tiger', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Devil Rat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Water Buffalo Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Wild Minotaur', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Wolly Mammoth', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Cerberus Hound', [6, 4, 5, 6, 4, 2, 6, 3, 2, 6, 5, 0]);
-		races.set('Goat Unicorn', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Ghoul', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Angel Squirrel', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bastet', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Birds
-		races.set('Eyekiller', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Blood Kite', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Oracle Owl', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Thunderbird', [4, 3, 7, 8, 3, 2, 4, 1, 1, 6, 6, 0]);
-		races.set('Scintillant Albatross', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Emperor Eagle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Lesser Thunderbird', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Merlin Hawk', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Phoenix', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Lesser Roc', [4, 5, 4, 4, 2, 2, 4, 1, 1, 6, 3, 0]);
-		races.set('Siberian Firebird', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Strix', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Stormcrow', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Stymphalian', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Cockatrice', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Deathspiral Butterfly', [1, 4, 5, 1, 4, 2, 4, 6, 2, 6, 6, 0]);
-
-		// -Insects
-		races.set('Alufye', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Ghede Fly', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Jauchekäfer', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Leerenwespe', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Siberian Bee', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Wyrd Mantis', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Amphora Mite', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Arachnids
-		races.set('Spider Beast', [2, 4, 4, 2, 3, 1, 3, 1, 1, 6, 6, 0]);
-		races.set('Nova Scorpion', [4, 4, 4, 3, 3, 2, 5, 1, 2, 6, 3, 0]);
-		races.set('Scorpyrine', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		// -Other
-		races.set('Abrams Lobster', [4, 3, 2, 7, 3, 4, 3, 1, 2, 6, 0, 0]);
-		races.set('Chupacabra', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Each-Uisge', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Fideal', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Incubus', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Kraken', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Siren', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Rockworm', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Gargoyle', [10, 4, 5, 10, 4, 2, 4, 1, 1, 6, 5, 0]);
-		races.set('European Gargoyle', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Fiji Mermaid', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Kludde', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Mermaid', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Sea Leech', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Leviathan', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Bandersnatch', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Dour', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shapeshifter', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Troglodyte', [3, 3, 4, 2, 3, 2, 3, 2, 1, 6, 2, 0]);
-		races.set('Merrow', [5, 3, 5, 5, 3, 3, 3, 3, 3, 6, 3, 0]);
-		races.set('Naga', [5, 2, 4, 6, 4, 3, 4, 3, 4, 6, 4, 0]);
-		races.set('Wodewose', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Protean', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Griffin', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Will o Whisp', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Mantichoras', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-		races.set('Shadow Crab', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-		//TODO: Add augmentation if required
-		if(races.has(race))
+		var critter_entry = this.get_critter(race);
+		if(critter_entry)
 		{
-			var stats = races.get(race);
+			var stats = critter_entry.stats;
 			res.attributes.body = stats[0];
 			res.attributes.agility = stats[1];
 			res.attributes.reaction = stats[2];
@@ -2149,6 +3079,11 @@ var db = {
 			res.attributes.essence = stats[9];
 			res.attributes.magic = stats[10];
 			res.attributes.resonance = stats[11];
+
+			for(var augment in critter_entry.augment)
+			{
+				res.augmentations.push({name: critter_entry.augment[augment]});
+			}
 
 			return res;
 		}

@@ -473,29 +473,14 @@ var gen = {
 
 	critter: function(options)
 	{
-		//TODO: Adjust everything for critters
 		if (options === undefined)
 		{
 			options = {};
 		}
 
 		options = $.extend({}, {
-			name: 'Mook #' + roll.dval(10) + roll.dval(10) + roll.dval(10),
-			gender: false, // false for random
+			name: 'Critter #' + roll.dval(10) + roll.dval(10) + roll.dval(10),
 			race: false,
-			professional_rating: -1,
-			professional_type: false,
-			is_lt: false,
-			is_adept: false,
-			is_mage: false,
-			is_decker: false,
-			is_johnson: false,
-			is_gunbunny: false,
-			is_samurai: false,
-			is_tank: false,
-			is_shaman: false,
-			is_contact: false,
-			contact: false, // {connection rating, loyalty rating, type} || false
 			notes: null
 		}, options);
 
@@ -518,8 +503,6 @@ var gen = {
 		critter.condition_monitor = storage.setting('condition_monitor');
 		critter.wound_penalty = storage.setting('wound_penalty');
 
-		critter.gender = "";
-
 		// If we don't have a race, generate one
 		if (options.race === false || options.race.startsWith('-'))
 		{
@@ -531,27 +514,6 @@ var gen = {
 		var racial_baseline = db.get_critter_adjustment(options.race);
 
 		this._merge_adjustments(critter, racial_baseline);
-
-		// If we don't have a professional type and we aren't a contact, then generate one
-		if (options.professional_type === false)
-		{
-			if (options.is_contact === false)
-			{
-				options.professional_type = this.type_options[roll.dval(this.type_options.length - 1)];
-			}
-		}
-
-		critter.professional_description = '';
-
-		// Is this a special type? [LT, adept, mage, decker]
-		var adjustments;
-
-		if (options.is_lt)
-		{
-			adjustments = db.get_special_adjustments('LT', options);
-			this._merge_adjustments(critter, adjustments);
-			critter.special.is_lt = true;
-		}
 
 		return critter;
 	},

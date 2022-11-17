@@ -2044,6 +2044,11 @@ var db = {
 					name: 'Sasquatch',
 					stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0],
 					augment: ['Dual Natured', 'Mimicry', 'Natural Weapon (Claws: DV(STR+1)P, AP -, Reach +1)', 'Uneducated']
+				},
+				{
+					name: 'Special',
+					stats: [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+					augment: []
 				}
 			]
 		}
@@ -3284,7 +3289,7 @@ var db = {
 			max_rating: 3
 		},
 		{
-			name: 'Troll Dermal Deposits',
+			name: 'Troll Dermal Deposits (1)',
 			essence: 0,
 			selectable: false
 		},

@@ -229,12 +229,12 @@ var render = {
         var all_races = db.get_metatype_list();
         all_races.forEach(function(cat)
         {
-            $race_select.append($('<optgroup label="' + cat.category + '">'));
+			var group = $('<optgroup label="' + cat.category + '"/>');
             cat.entries.forEach(function (ent)
             {
-                $race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+                $('<option value="' + ent.name + '"/>').html(ent.name).appendTo(group);
             });
-			$race_select.append($('</optgroup>'));
+			$race_select.append(group);
         });
 
 		$mook.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
@@ -909,12 +909,12 @@ var render = {
 		var all_critters = db.get_critter_list();
 		all_critters.forEach(function(cat)
 		{
-			$race_select.append($('<optgroup label="' + cat.category + '">'));
+			var group = $('<optgroup label="' + cat.category + '"/>');
 			cat.entries.forEach(function (ent)
 			{
-				$race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+				$('<option value="' + ent.name + '"/>').html(ent.name).appendTo(group);
 			});
-			$race_select.append($('</optgroup>'));
+			$race_select.append(group);
 		});
 
 		$critter.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);

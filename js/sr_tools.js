@@ -383,19 +383,60 @@ function view_generator()
 
 	var $template = render.get_template('minion_generator_section');
 
-	//TODO: Make the optgroups work
+	//Load all metatypes to selector in minion-generator
 	var $single_race_select = $template.find('select[name="single_race_selector"]');
 	$single_race_select.empty();
 	var all_metatypes = db.get_metatype_list();
 	$single_race_select.append($('<option value=""/>').html('- Random'));
 	all_metatypes.forEach(function(cat)
 	{
-		$single_race_select.append($('<optgroup label="' + cat.category + '">'));
+		var group = $('<optgroup label="' + cat.category + '"/>');
 		cat.entries.forEach(function (ent)
 		{
-			$single_race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+			$('<option value="' + ent.name + '"/>').html(ent.name).appendTo(group);
 		});
-		$single_race_select.append($('</optgroup>'));
+		$single_race_select.append(group);
+	});
+
+	//Load all metatypes to selector in mob-generator
+	var $multi_race_selector = $template.find('select[name="multi_race_selector"]');
+	$multi_race_selector.empty();
+	$multi_race_selector.append($('<option value=""/>').html('- Individually Random'));
+	all_metatypes.forEach(function(cat)
+	{
+		var group = $('<optgroup label="' + cat.category + '"/>');
+		cat.entries.forEach(function (ent)
+		{
+			$('<option value="' + ent.name + '"/>').html('All ' + ent.name).appendTo(group);
+		});
+		$multi_race_selector.append(group);
+	});
+
+	//Load all species to selector in critter-generator
+	var $critter_race_selector = $template.find('select[name="critter_race_selector"]');
+	$critter_race_selector.empty();
+	var all_critters = db.get_critter_list();
+	$critter_race_selector.append($('<option value=""/>').html('- Individually Random'));
+	var randomizerGroup = $('<optgroup label="Randomizers"/>');
+	$('<option value="-Unawakened Animal"/>').html('Random Mundane').appendTo(randomizerGroup);
+	$('<option value="-Reptiles"/>').html('Random Reptile').appendTo(randomizerGroup);
+	$('<option value="-Dracoforms"/>').html('Random Dracoform').appendTo(randomizerGroup);
+	$('<option value="-Amphibians"/>').html('Random Amphibian').appendTo(randomizerGroup);
+	$('<option value="-Fishes"/>').html('Random Fish').appendTo(randomizerGroup);
+	$('<option value="-Mammals"/>').html('Random Mammal').appendTo(randomizerGroup);
+	$('<option value="-Birds"/>').html('Random Bird').appendTo(randomizerGroup);
+	$('<option value="-Insects"/>').html('Random Insect').appendTo(randomizerGroup);
+	$('<option value="-Arachnids"/>').html('Random Arachnid').appendTo(randomizerGroup);
+	$('<option value="-Other"/>').html('Other Random Species').appendTo(randomizerGroup);
+	$critter_race_selector.append(randomizerGroup);
+	all_critters.forEach(function(cat)
+	{
+		var group = $('<optgroup label="' + cat.category + '"/>');
+		cat.entries.forEach(function (ent)
+		{
+			$('<option value="' + ent.name + '"/>').html('All ' + ent.name).appendTo(group);
+		});
+		$critter_race_selector.append(group);
 	});
 
 	var current_npc;

@@ -2127,9 +2127,7 @@ var db = {
 			return res;
 		}
 		else
-		{
-			return this.get_critter_adjustment(race);
-		}
+			return false;
 	},
 
 	_critter_list: [

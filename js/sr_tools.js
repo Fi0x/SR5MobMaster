@@ -637,8 +637,8 @@ function view_generator()
 				break;
 		}
 
-		if ($('#mob_generator .entry_form select[name="race"] option:selected').val())
-			options.race = $('#mob_generator .entry_form select[name="race"] option:selected').val();
+		if ($('#mob_generator .entry_form select[name="multi_race_selector"] option:selected').val())
+			options.race = $('#mob_generator .entry_form select[name="multi_race_selector"] option:selected').val();
 
 		if ($('#mob_generator .entry_form select[name="gender"] option:selected').val())
 			options.gender = $('#mob_generator .entry_form select[name="gender"] option:selected').val();
@@ -886,8 +886,8 @@ function view_generator()
 				break;
 		}
 
-		if ($('#critter_generator .entry_form select[name="critter_race"] option:selected').val())
-			options.race = $('#critter_generator .entry_form select[name="critter_race"] option:selected').val();
+		if ($('#critter_generator .entry_form select[name="critter_race_selector"] option:selected').val())
+			options.race = $('#critter_generator .entry_form select[name="critter_race_selector"] option:selected').val();
 
 		for (i = 0; i < critter_count; i++)
 		{

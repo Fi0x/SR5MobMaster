@@ -21,6 +21,8 @@ var gen = {
 
 			if (base.hasOwnProperty('race'))
 				racial = db.get_metatype_adjustment(base.race);
+			if(racial === false)
+				racial = db.get_critter_adjustment(base.race);
 
 			attributes.forEach(function(att)
 			{

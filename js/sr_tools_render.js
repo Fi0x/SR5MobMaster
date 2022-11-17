@@ -899,9 +899,6 @@ var render = {
 		// Mook name
 		$critter.find('#name').val(data.name);
 
-		// Gender
-		$critter.find('select[name="gender"] option[value="' + data.gender + '"]').prop('selected', true);
-
 		// Race
 		var $race_select = $critter.find('select[name="race"]');
 
@@ -3003,11 +3000,19 @@ var render = {
 		base_attributes.forEach(function (i)
 		{
 			var a = data.attributes[i];
-			if (augmented_attributes[i] !== data.attributes[i])
+			if(a === 0)
 			{
-				a += ' (' + augmented_attributes[i] + ')';
+				$mook.find('.attribute_values .attribute_value.' + i).hide();
+				$mook.find('.attribute_names .attribute_name.' + i).hide();
 			}
-			$mook.find('.attribute_values .attribute_value.' + i).html(a);
+			else
+			{
+				if (augmented_attributes[i] !== data.attributes[i])
+				{
+					a += ' (' + augmented_attributes[i] + ')';
+				}
+				$mook.find('.attribute_values .attribute_value.' + i).html(a);
+			}
 		});
 
 		// Essence
@@ -3563,11 +3568,19 @@ var render = {
 		base_attributes.forEach(function (i)
 		{
 			var a = data.attributes[i];
-			if (augmented_attributes[i] !== data.attributes[i])
+			if(a === 0)
 			{
-				a += ' (' + augmented_attributes[i] + ')';
+				$critter.find('.attribute_values .attribute_value.' + i).hide();
+				$critter.find('.attribute_names .attribute_name.' + i).hide();
 			}
-			$critter.find('.attribute_values .attribute_value.' + i).html(a);
+			else
+			{
+				if (augmented_attributes[i] !== data.attributes[i])
+				{
+					a += ' (' + augmented_attributes[i] + ')';
+				}
+				$critter.find('.attribute_values .attribute_value.' + i).html(a);
+			}
 		});
 
 		// Essence

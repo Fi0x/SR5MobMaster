@@ -250,6 +250,7 @@
 
 					<div class="input_row">
 						<label equalize>Race</label>
+<!--                        TODO: Fix race selection-->
 						<select name="single_race_selector">
                         </select>
 					</div>
@@ -467,18 +468,18 @@
 		<div class="npc_description"></div>
 		<div class="npc_notes"></div>
 		<div class="attribute_names">
-			<div class="attribute_name">BOD</div>
-			<div class="attribute_name">AGI</div>
-			<div class="attribute_name">REA</div>
-			<div class="attribute_name">STR</div>
-			<div class="attribute_name">WIL</div>
-			<div class="attribute_name">LOG</div>
-			<div class="attribute_name">INT</div>
-			<div class="attribute_name">CHA</div>
-            <div class="attribute_name">EDG</div>
-            <div class="attribute_name">ESS</div>
-            <div class="attribute_name">MAG</div>
-            <div class="attribute_name">RES</div>
+			<div class="attribute_name body">BOD</div>
+			<div class="attribute_name agility">AGI</div>
+			<div class="attribute_name reaction">REA</div>
+			<div class="attribute_name strength">STR</div>
+			<div class="attribute_name will">WIL</div>
+			<div class="attribute_name logic">LOG</div>
+			<div class="attribute_name intuition">INT</div>
+			<div class="attribute_name charisma">CHA</div>
+            <div class="attribute_name edge">EDG</div>
+            <div class="attribute_name essence">ESS</div>
+            <div class="attribute_name magic">MAG</div>
+            <div class="attribute_name resonance">RES</div>
 		</div>
 
 		<div class="attribute_values">
@@ -583,18 +584,18 @@
         <div class="critter_description"></div>
         <div class="critter_notes"></div>
         <div class="attribute_names">
-            <div class="attribute_name">BOD</div>
-            <div class="attribute_name">AGI</div>
-            <div class="attribute_name">REA</div>
-            <div class="attribute_name">STR</div>
-            <div class="attribute_name">WIL</div>
-            <div class="attribute_name">LOG</div>
-            <div class="attribute_name">INT</div>
-            <div class="attribute_name">CHA</div>
-            <div class="attribute_name">EDG</div>
-            <div class="attribute_name">ESS</div>
-            <div class="attribute_name">MAG</div>
-            <div class="attribute_name">RES</div>
+            <div class="attribute_name body">BOD</div>
+            <div class="attribute_name agility">AGI</div>
+            <div class="attribute_name reaction">REA</div>
+            <div class="attribute_name strength">STR</div>
+            <div class="attribute_name will">WIL</div>
+            <div class="attribute_name logic">LOG</div>
+            <div class="attribute_name intuition">INT</div>
+            <div class="attribute_name charisma">CHA</div>
+            <div class="attribute_name edge">EDG</div>
+            <div class="attribute_name essence">ESS</div>
+            <div class="attribute_name magic">MAG</div>
+            <div class="attribute_name resonance">RES</div>
         </div>
 
         <div class="attribute_values">
@@ -983,6 +984,10 @@
 			<select name="race">
 			</select>
 		</div>
+        <div class="npc_notes">
+            <label>Notes</label>
+            <textarea id="npc_notes"></textarea>
+        </div>
 		<div class="attribute_names">
 			<div class="attribute_name body">BOD</div>
 			<div class="attribute_name agility">AGI</div>
@@ -994,11 +999,6 @@
 			<div class="attribute_name charisma">CHA</div>
 			<div class="attribute_name magic">MAG</div>
             <div class="attribute_name resonance">RES</div>
-			<div class="attribute_name initiate">INIT</div>
-		</div>
-		<div class="npc_notes">
-			<label>Notes</label>
-			<textarea id="npc_notes"></textarea>
 		</div>
 		<div class="attribute_values">
 			<div class="attribute_value body"></div>
@@ -1011,7 +1011,6 @@
 			<div class="attribute_value charisma"></div>
 			<div class="attribute_value magic"></div>
             <div class="attribute_value resonance"></div>
-			<div class="attribute_value initiate"></div>
 		</div>
 		<div class="other_information">
 			<div class="condition_monitor">
@@ -1095,6 +1094,10 @@
             <select name="race">
             </select>
         </div>
+        <div class="critter_notes">
+            <label>Notes</label>
+            <textarea id="critter_notes"></textarea>
+        </div>
         <div class="attribute_names">
             <div class="attribute_name body">BOD</div>
             <div class="attribute_name agility">AGI</div>
@@ -1104,13 +1107,9 @@
             <div class="attribute_name logic">LOG</div>
             <div class="attribute_name intuition">INT</div>
             <div class="attribute_name charisma">CHA</div>
+            <div class="attribute_name edge">EDG</div>
             <div class="attribute_name magic">MAG</div>
             <div class="attribute_name resonance">RES</div>
-            <div class="attribute_name initiate">INIT</div>
-        </div>
-        <div class="critter_notes">
-            <label>Notes</label>
-            <textarea id="critter_notes"></textarea>
         </div>
         <div class="attribute_values">
             <div class="attribute_value body"></div>
@@ -1121,9 +1120,9 @@
             <div class="attribute_value logic"></div>
             <div class="attribute_value intuition"></div>
             <div class="attribute_value charisma"></div>
+            <div class="attribute_value edge"></div>
             <div class="attribute_value magic"></div>
             <div class="attribute_value resonance"></div>
-            <div class="attribute_value initiate"></div>
         </div>
         <div class="other_information">
             <div class="condition_monitor">

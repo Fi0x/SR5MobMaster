@@ -336,6 +336,13 @@ div[template_holder]
 	border-bottom: 1px solid #ccee00;
 	padding: 2px 2px 2px 4px;
 }
+.display_npc_wrapper .critter_name,
+.display_npc_wrapper .critter_description,
+.display_npc_wrapper .critter_notes
+{
+	border-bottom: 1px solid #ccee00;
+	padding: 2px 2px 2px 4px;
+}
 .display_npc_wrapper .attribute_names
 {
 	border-bottom: 1px solid #ccee00;
@@ -522,8 +529,14 @@ div[template_holder]
 	margin: 2px 2px 2px 4px;
 	width: calc(100% - 16px);
 }
+.edit_npc_wrapper .critter_notes textarea
+{
+	margin: 2px 2px 2px 4px;
+	width: calc(100% - 16px);
+}
 
 .edit_npc_wrapper .npc_notes label,
+.edit_npc_wrapper .critter_notes label,
 .edit_npc_wrapper .other_information > div > label
 {
 	display: block;

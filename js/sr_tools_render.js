@@ -236,7 +236,7 @@ var render = {
             });
         });
 
-        $race_select.prop('selected', true);
+		$mook.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
 
 		var attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];
 		var metatype_attributes = db.get_metatype_adjustment(data.race);
@@ -902,6 +902,19 @@ var render = {
 		$critter.find('select[name="gender"] option[value="' + data.gender + '"]').prop('selected', true);
 
 		// Race
+		var $race_select = $critter.find('select[name="race"]');
+
+		$race_select.empty();
+		var all_critters = db.get_critter_list();
+		all_critters.forEach(function(cat)
+		{
+			$race_select.append($('<optgroup label="' + cat.category + '"/>'));
+			cat.entries.forEach(function (ent)
+			{
+				$race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+			});
+		});
+
 		$critter.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
 
 		var attributes = ['body', 'agility', 'reaction', 'strength', 'will', 'logic', 'intuition', 'charisma', 'edge', 'magic', 'resonance'];

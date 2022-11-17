@@ -378,7 +378,6 @@ function view_cast(show_intro)
 
 function view_generator()
 {
-	//TODO: Auto-load metatype and critter options into <select>
 	var $container = $('.main_content').empty();
 
 	var $template = render.get_template('minion_generator_section');

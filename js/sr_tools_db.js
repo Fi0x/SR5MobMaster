@@ -1960,7 +1960,6 @@ var db = {
 		{
 			category: 'Infected Ones',
 			entries: [
-				//TODO: Adjust the infected races
 				{
 					name: 'Vampire',
 					stats: [0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0],
@@ -1994,32 +1993,32 @@ var db = {
 				{
 					name: 'Wendigo',
 					stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0],
-					augment: []
+					augment: ['Dual Natured', 'Low-Light Vision', 'Enhanced Hearing', 'Enhanced Smell', 'Age Immunity', 'Pathogen Immunity', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Ferrous Metals, Moderate)', 'Allergy (Sunlight, Severe)']
 				},
 				{
 					name: 'Grendel',
 					stats: [3, 0, 0, 2, 0, -1, 0, -1, 0, 6, 0],
-					augment: []
+					augment: ['Dual Natured', 'Low-Light Vision', 'Enhanced Smell', 'Thermographic Vision', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+1)P, AP -1, Reach 0)', 'Allergy (Sunlight, Moderate)']
 				},
 				{
 					name: 'Fomoraig',
 					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
-					augment: []
+					augment: ['Armor (3)', 'Dual Natured', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Air Pollution, Moderate)', 'Allergy (Sunlight, Moderate)']
 				},
 				{
 					name: 'Mutaqua',
 					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
-					augment: []
+					augment: ['Armor (5)', 'Dual Natured', 'Low-Light Vision', 'Enhanced Hearing', 'Thermographic Vision', 'Age Immunity', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Sunlight, Extreme)', 'Allergy (Wood, Severe)']
 				},
 				{
 					name: 'Bandersnatch',
 					stats: [5, 0, 0, 4, 0, 0, 0, 0, 0, 6, 0],
-					augment: []
+					augment: ['Adaptive Coloration', 'Dual Natured', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Sunlight, Mild)']
 				},
 				{
 					name: 'Dzoo-Noo-Qua',
 					stats: [4, -1, 0, 4, 0, -1, -1, -2, 0, 6, 0],
-					augment: []
+					augment: ['Armor (4)', 'Dual Natured', 'Enhanced Hearing', 'Thermographic Vision', 'Age Immunity', 'Toxin Immunity', 'Natural Weapon (Bite: DV(STR+1)P, AP -1, Reach -1)', 'Natural Weapon (Claws: DV(STR+2)P, AP -1, Reach 0)', 'Allergy (Sunlight, Moderate)']
 				},
 			]
 		},
@@ -2050,7 +2049,6 @@ var db = {
 		}
 	],
 
-	//TODO: Use this like get_augmentation_list for render to auto-generate a full list
 	get_metatype_list: function()
 	{
 		return this._metatype_list;
@@ -2186,7 +2184,7 @@ var db = {
 				},
 				{
 					name: 'Large Dog',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [4, 3, 4, 4, 3, 2, 4, 3, 3, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2216,7 +2214,7 @@ var db = {
 				},
 				{
 					name: 'Horse',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [8, 5, 5, 8, 3, 2, 3, 4, 2, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2246,7 +2244,7 @@ var db = {
 				},
 				{
 					name: 'Shark',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [5, 4, 5, 5, 3, 1, 4, 1, 2, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2281,12 +2279,12 @@ var db = {
 				},
 				{
 					name: 'Ammit',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [7, 5, 4, 7, 2, 2, 4, 1, 0, 6, 0, 0],
 					augment: []
 				},
 				{
 					name: 'Basilisk',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [6, 3, 3, 7, 5, 1, 3, 1, 1, 6, 4, 0],
 					augment: []
 				},
 				{
@@ -2341,7 +2339,7 @@ var db = {
 				},
 				{
 					name: 'Ahi',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [0, 0, 0, 0, 3, 0, 3, 1, 0, 0, 0, 4],
 					augment: []
 				}
 			]
@@ -2436,7 +2434,7 @@ var db = {
 				},
 				{
 					name: 'Talis Cat',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [5, 5, 4, 4, 3, 2, 3, 3, 0, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2451,7 +2449,7 @@ var db = {
 				},
 				{
 					name: 'Bahari',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [8, 5, 5, 8, 4, 4, 4, 3, 2, 6, 4, 0],
 					augment: []
 				},
 				{
@@ -2486,7 +2484,7 @@ var db = {
 				},
 				{
 					name: 'Blink Sloth',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [6, 8, 11, 5, 4, 1, 5, 4, 2, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2496,7 +2494,7 @@ var db = {
 				},
 				{
 					name: 'Bombardier',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [1, 4, 4, 1, 2, 2, 3, 3, 2, 6, 3, 0],
 					augment: []
 				},
 				{
@@ -2586,12 +2584,12 @@ var db = {
 				},
 				{
 					name: 'Hell Hound',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [6, 4, 5, 6, 4, 2, 4, 3, 3, 6, 5, 0],
 					augment: []
 				},
 				{
 					name: 'Hellcow',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [10, 3, 3, 8, 1, 1, 1, 1, 2, 6, 0, 0],
 					augment: []
 				},
 				{
@@ -2691,7 +2689,7 @@ var db = {
 				},
 				{
 					name: 'Shasta Deer',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [4, 3, 4, 3, 2, 3, 4, 1, 2, 6, 6, 0],
 					augment: []
 				},
 				{
@@ -2706,7 +2704,7 @@ var db = {
 				},
 				{
 					name: 'Devil Rat',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [2, 5, 5, 1, 3, 2, 5, 5, 2, 6, 4, 0],
 					augment: []
 				},
 				{
@@ -2736,17 +2734,17 @@ var db = {
 				},
 				{
 					name: 'Ghoul',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [7, 3, 5, 6, 5, 2, 4, 1, 3, 5, 1, 0],
 					augment: []
 				},
 				{
 					name: 'Angel Squirrel',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [1, 5, 4, 1, 2, 2, 4, 1, 1, 6, 6, 0],
 					augment: []
 				},
 				{
 					name: 'Bastet',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [0, 0, 0, 0, 3, 2, 4, 3, 0, 0, 0, 5],
 					augment: []
 				}
 			]
@@ -2811,7 +2809,7 @@ var db = {
 				},
 				{
 					name: 'Strix',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [1, 4, 3, 1, 2, 2, 4, 2, 0, 6, 3, 0],
 					augment: []
 				},
 				{
@@ -2826,7 +2824,7 @@ var db = {
 				},
 				{
 					name: 'Cockatrice',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [4, 5, 4, 4, 4, 2, 3, 1, 1, 6, 5, 0],
 					augment: []
 				},
 				{
@@ -2871,7 +2869,7 @@ var db = {
 				},
 				{
 					name: 'Amphora Mite',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [0, 2, 2, 0, 1, 2, 1, 1, 3, 6, 0, 0],
 					augment: []
 				}
 			]
@@ -2906,7 +2904,7 @@ var db = {
 				},
 				{
 					name: 'Chupacabra',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [5, 4, 5, 4, 6, 3, 5, 1, 2, 7, 0, 0],
 					augment: []
 				},
 				{
@@ -2951,12 +2949,12 @@ var db = {
 				},
 				{
 					name: 'Fiji Mermaid',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [2, 5, 7, 4, 3, 2, 4, 1, 2, 6, 0, 0],
 					augment: []
 				},
 				{
 					name: 'Kludde',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [4, 3, 3, 4, 3, 2, 3, 3, 2, 6, 5, 0],
 					augment: []
 				},
 				{
@@ -2966,7 +2964,7 @@ var db = {
 				},
 				{
 					name: 'Sea Leech',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [7, 3, 2, 8, 1, 3, 4, 3, 4, 6, 6, 0],
 					augment: []
 				},
 				{
@@ -3011,7 +3009,7 @@ var db = {
 				},
 				{
 					name: 'Protean',
-					stats: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					stats: [0, 3, 2, 0, 3, 4, 3, 1, 2, 6, 5, 0],
 					augment: []
 				},
 				{
@@ -3038,7 +3036,6 @@ var db = {
 		}
 	],
 
-	//TODO: Use this like get_augmentation_list for render to auto-generate a full list
 	get_critter_list: function()
 	{
 		return this._critter_list;

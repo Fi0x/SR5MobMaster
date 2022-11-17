@@ -229,11 +229,12 @@ var render = {
         var all_races = db.get_metatype_list();
         all_races.forEach(function(cat)
         {
-            $race_select.append($('<optgroup label="' + cat.category + '"/>'));
+            $race_select.append($('<optgroup label="' + cat.category + '">'));
             cat.entries.forEach(function (ent)
             {
                 $race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
             });
+			$race_select.append($('</optgroup>'));
         });
 
 		$mook.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);
@@ -908,11 +909,12 @@ var render = {
 		var all_critters = db.get_critter_list();
 		all_critters.forEach(function(cat)
 		{
-			$race_select.append($('<optgroup label="' + cat.category + '"/>'));
+			$race_select.append($('<optgroup label="' + cat.category + '">'));
 			cat.entries.forEach(function (ent)
 			{
 				$race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
 			});
+			$race_select.append($('</optgroup>'));
 		});
 
 		$critter.find('select[name="race"] option[value="' + data.race + '"]').prop('selected', true);

@@ -378,9 +378,25 @@ function view_cast(show_intro)
 
 function view_generator()
 {
+	//TODO: Auto-load metatype and critter options into <select>
 	var $container = $('.main_content').empty();
 
 	var $template = render.get_template('minion_generator_section');
+
+	//TODO: Make the optgroups work
+	var $single_race_select = $template.find('select[name="single_race_selector"]');
+	$single_race_select.empty();
+	var all_metatypes = db.get_metatype_list();
+	$single_race_select.append($('<option value=""/>').html('- Random'));
+	all_metatypes.forEach(function(cat)
+	{
+		$single_race_select.append($('<optgroup label="' + cat.category + '">'));
+		cat.entries.forEach(function (ent)
+		{
+			$single_race_select.append($('<option value="' + ent.name + '"/>').html(ent.name));
+		});
+		$single_race_select.append($('</optgroup>'));
+	});
 
 	var current_npc;
 
